@@ -6,7 +6,7 @@ const SoundEffect = Enums.SoundEffect
 # --- Sound Preloads ---
 # Map SoundEffect enum values to their audio file paths
 const SOUND_PATHS = {
-    SoundEffect.HIT_ENEMY: "res://assets/audio/sfx/hit_sound2.wav",
+    SoundEffect.HIT_ENEMY: "res://assets/audio/sfx/hit_sound.wav",
     # Add paths for other sounds defined in the enum:
     # Enums.SoundEffect.ENEMY_DEATH: "res://assets/audio/sfx/enemy_death.wav",
     # Enums.SoundEffect.PLAYER_HURT: "res://assets/audio/sfx/player_hurt.wav",

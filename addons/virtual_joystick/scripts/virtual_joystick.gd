@@ -175,4 +175,33 @@ func get_value() -> Vector2:
 		
 	return Vector2.ZERO
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_PAUSED:
+			# When the game pauses (and this node is pausable), reset the joystick state.
+			# This handles the case where the pause happens mid-drag or touch.
+			if ongoing_drag != -1 or is_pressed:
+				reset_state()
+		# NOTIFICATION_UNPAUSED:
+			# Usually no action needed here, reset on pause is sufficient.
+			# pass
+
+# Make sure the reset_state function exists and works correctly
+# (Should be present from previous attempts)
+func reset_state() -> void:
+	if ongoing_drag != -1 or is_pressed: # Only reset if it was actually active
+		ongoing_drag = -1
+		is_pressed = false
+		analogic_change.emit(Vector2.ZERO) # Crucial: Emit zero vector
+		# Don't emit analogic_released here, as the touch didn't technically release normally
+
+		# Reset visual state
+		touch.texture_normal = stick if is_instance_valid(stick) else preload("res://addons/virtual_joystick/sprites/stick.png")
+		touch.position = -radius
+
+		if zero_at_touch:
+			# If it's zero_at_touch, hide it on reset
+			hide()
+		# else: # For fixed joystick, just reset input state, don't hide/move
+
 
