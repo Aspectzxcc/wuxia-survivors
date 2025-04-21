@@ -13,9 +13,8 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 		return
 
 	# Get amount and interval for the loop, other stats are passed directly
-	var amount = _get_stat(calculated_stats, StatType.TECHNIQUE_AMOUNT, 1) # How many projectiles
-	var interval = _get_stat(calculated_stats, StatType.TECHNIQUE_INTERVAL, 0.1) # Time between projectiles if amount > 1
-
+	var amount = calculated_stats.get(StatType.TECHNIQUE_AMOUNT, 1) # How many projectiles per activation
+	var interval = calculated_stats.get(StatType.TECHNIQUE_INTERVAL, 0.1) # Time between projectiles if amount > 1
 	# Find the single nearest enemy
 	var target_enemy = _find_nearest_enemy(player)
 

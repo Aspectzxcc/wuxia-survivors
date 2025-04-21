@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TechniqueData" load_steps=14 format=3 uid="uid://didi783lbr5pl"]
 
 [ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="1_8dw4c"]
-[ext_resource type="Script" uid="uid://fwv8gwmsg011" path="res://src/strategy/technique_activation/damage_radius_activation.gd" id="1_lang6"]
+[ext_resource type="Script" uid="uid://fwv8gwmsg011" path="res://src/strategy/technique_activation/damage_radius_activation_strategy.gd" id="1_lang6"]
 [ext_resource type="PackedScene" uid="uid://dnqpumw61o0gd" path="res://src/technique/incense_burner/incense_burner.tscn" id="1_yj0hj"]
 [ext_resource type="Texture2D" uid="uid://i3vkrmhkaxkl" path="res://icon.svg" id="2_8llwu"]
 [ext_resource type="Script" uid="uid://ib4wng377xdb" path="res://src/data/technique/technique_data.gd" id="2_fvitr"]
