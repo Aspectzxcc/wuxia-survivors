@@ -12,20 +12,9 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 		printerr("NearestEnemyProjectile: Technique data or effect scene not set!")
 		return
 
-	# Get stats from the pre-calculated dictionary
-	var damage = _get_stat(calculated_stats, StatType.TECHNIQUE_DAMAGE, 5.0)
-	var knockback = _get_stat(calculated_stats, StatType.TECHNIQUE_KNOCKBACK, 50.0)
-	var speed = _get_stat(calculated_stats, StatType.TECHNIQUE_SPEED, 300.0)
-	var area_size = _get_stat(calculated_stats, StatType.TECHNIQUE_AREA_SIZE, 1.0)
-	var piercing = _get_stat(calculated_stats, StatType.TECHNIQUE_PIERCING, 1)
+	# Get amount and interval for the loop, other stats are passed directly
 	var amount = _get_stat(calculated_stats, StatType.TECHNIQUE_AMOUNT, 1) # How many projectiles
 	var interval = _get_stat(calculated_stats, StatType.TECHNIQUE_INTERVAL, 0.1) # Time between projectiles if amount > 1
-	# --- NEW STATS ---
-	var hitbox_delay = _get_stat(calculated_stats, StatType.TECHNIQUE_HITBOX_DELAY, 0.0)
-	var crit_chance = _get_stat(calculated_stats, StatType.TECHNIQUE_CRIT_CHANCE, 0.0)
-	var crit_multiplier = _get_stat(calculated_stats, StatType.TECHNIQUE_CRIT_MULTIPLIER, 2.0)
-	var effect_chance = _get_stat(calculated_stats, StatType.TECHNIQUE_EFFECT_CHANCE, 0.0)
-	# --- END NEW STATS ---
 
 	# Find the single nearest enemy
 	var target_enemy = _find_nearest_enemy(player)
@@ -52,25 +41,10 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 		var direction = (target_enemy.global_position - player.global_position).normalized()
 
 		# Configure the projectile (assuming it has these methods/properties)
-		# --- UPDATED: Use initialize instead of set_stats ---
+		# --- UPDATED: Use initialize and pass calculated_stats + direction ---
 		if instance.has_method("initialize"):
-			# Pass all relevant stats, including new ones
-			instance.initialize(
-				damage,
-				knockback,
-				area_size,
-				speed,
-				piercing,
-				direction,
-				hitbox_delay,
-				crit_chance,
-				crit_multiplier,
-				effect_chance
-				# Note: Duration is often handled internally by the projectile's timer,
-				# but pass it if your initialize method needs it.
-				# If the projectile scene manages its own lifetime via a Timer (like QiBlast),
-				# you might not need to pass 'duration' here. Adjust as needed.
-			)
+			# Pass the stats dictionary and the calculated direction
+			instance.initialize(calculated_stats, direction)
 		else:
 			printerr("NearestEnemyProjectile: Instantiated scene '%s' is missing initialize method." % technique_data.effect_scene.resource_path)
 		# --- END UPDATED ---

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://2ud7ay5k1mdy"]
+
+[ext_resource type="Script" uid="uid://b6s8o1cfnuspa" path="res://src/data/stat/stat_modifier.gd" id="1_vjycc"]
+[ext_resource type="Resource" uid="uid://dsgc0k76p5uj1" path="res://src/resource/stat_modifier/-0.1_tech_cooldown_add.tres" id="2_pyukk"]
+[ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="2_th33p"]
+[ext_resource type="Resource" uid="uid://dscpal4trmy0x" path="res://src/resource/stat_modifier/+1_tech_damage_add.tres" id="3_rh6s2"]
+
+[resource]
+script = ExtResource("2_th33p")
+level = 3
+description = "-0.1 Cooldown, +1 Damage"
+modifications = Array[ExtResource("1_vjycc")]([ExtResource("2_pyukk"), ExtResource("3_rh6s2")])
+metadata/_custom_type_script = "uid://cfpfyba7wygbj"

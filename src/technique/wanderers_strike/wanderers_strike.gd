@@ -9,12 +9,11 @@ var final_damage: float = 0.0
 var final_knockback: float = 0.0
 var final_area_size_multiplier: float = 1.0 # The calculated area multiplier
 var final_strike_duration: float = 0.15
-# --- NEW STATS ---
 var final_hitbox_delay: float = 0.0
 var final_crit_chance: float = 0.0
 var final_crit_multiplier: float = 2.0
 var final_effect_chance: float = 0.0
-# --- END NEW STATS ---
+# --- END STATS ---
 
 var bodies_hit_this_sweep: Array = []
 
@@ -22,29 +21,20 @@ var bodies_hit_this_sweep: Array = []
 @onready var effect_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var duration_timer: Timer = $DurationTimer
 
+const StatType = Enums.StatType # Use unified StatType
+
 # --- UPDATED SIGNATURE ---
-func initialize(
-    _damage: float,
-    _knockback: float,
-    _area_size: float, # Receive area size multiplier
-    _strike_duration: float,
-    # --- New Parameters ---
-    _hitbox_delay: float,
-    _crit_chance: float,
-    _crit_multiplier: float,
-    _effect_chance: float
-):
+func initialize(calculated_stats: Dictionary):
 # --- END UPDATED SIGNATURE ---
-    final_damage = _damage
-    final_knockback = _knockback
-    final_area_size_multiplier = max(0.01, _area_size) # Store multiplier, ensure > 0
-    final_strike_duration = _strike_duration
-    # --- STORE NEW STATS ---
-    final_hitbox_delay = max(0.0, _hitbox_delay)
-    final_crit_chance = clampf(_crit_chance, 0.0, 1.0) # Ensure 0-1 range
-    final_crit_multiplier = max(1.0, _crit_multiplier) # Ensure multiplier is at least 1x
-    final_effect_chance = clampf(_effect_chance, 0.0, 1.0) # Ensure 0-1 range
-    # --- END STORE NEW STATS ---
+    # Get stats from the pre-calculated dictionary
+    final_damage = calculated_stats.get(StatType.TECHNIQUE_DAMAGE, 10.0)
+    final_knockback = calculated_stats.get(StatType.TECHNIQUE_KNOCKBACK, 100.0)
+    final_area_size_multiplier = max(0.01, calculated_stats.get(StatType.TECHNIQUE_AREA_SIZE, 1.0)) # Store multiplier, ensure > 0
+    final_strike_duration = calculated_stats.get(StatType.TECHNIQUE_DURATION, 0.5)
+    final_hitbox_delay = max(0.0, calculated_stats.get(StatType.TECHNIQUE_HITBOX_DELAY, 0.0))
+    final_crit_chance = clampf(calculated_stats.get(StatType.TECHNIQUE_CRIT_CHANCE, 0.0), 0.0, 1.0) # Ensure 0-1 range
+    final_crit_multiplier = max(1.0, calculated_stats.get(StatType.TECHNIQUE_CRIT_MULTIPLIER, 2.0)) # Ensure multiplier is at least 1x
+    final_effect_chance = clampf(calculated_stats.get(StatType.TECHNIQUE_EFFECT_CHANCE, 0.0), 0.0, 1.0) # Ensure 0-1 range
 
     # print(self.name, ": Initialized with Damage: ", final_damage, ", Knockback: ", final_knockback, ", AreaSizeMult: ", final_area_size_multiplier, ", Strike Duration: ", final_strike_duration, ", CritChance: ", final_crit_chance)
 

@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="TechniqueData" load_steps=14 format=3 uid="uid://didi783lbr5pl"]
+
+[ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="1_8dw4c"]
+[ext_resource type="Script" uid="uid://fwv8gwmsg011" path="res://src/strategy/technique_activation/damage_radius_activation.gd" id="1_lang6"]
+[ext_resource type="PackedScene" uid="uid://dnqpumw61o0gd" path="res://src/technique/incense_burner/incense_burner.tscn" id="1_yj0hj"]
+[ext_resource type="Texture2D" uid="uid://i3vkrmhkaxkl" path="res://icon.svg" id="2_8llwu"]
+[ext_resource type="Script" uid="uid://ib4wng377xdb" path="res://src/data/technique/technique_data.gd" id="2_fvitr"]
+[ext_resource type="Resource" uid="uid://b7x3jwc82rvwn" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level2.tres" id="4_l7m0x"]
+[ext_resource type="Resource" uid="uid://2ud7ay5k1mdy" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level3.tres" id="5_lang6"]
+[ext_resource type="Resource" uid="uid://b78cyc8vrmq66" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level4.tres" id="6_gdd6r"]
+[ext_resource type="Resource" uid="uid://7l7kvfu7uh2d" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level5.tres" id="7_0bnv5"]
+[ext_resource type="Resource" uid="uid://cu6yi5crxxrau" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level6.tres" id="8_jb0gq"]
+[ext_resource type="Resource" uid="uid://bw6f635kgwc8w" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level7.tres" id="9_hlivw"]
+[ext_resource type="Resource" uid="uid://6yelux46fblb" path="res://src/resource/level_upgrades/technique/incense_burner/ib_level8.tres" id="10_egq5v"]
+
+[sub_resource type="Resource" id="Resource_gdd6r"]
+script = ExtResource("1_lang6")
+metadata/_custom_type_script = "uid://fwv8gwmsg011"
+
+[resource]
+script = ExtResource("2_fvitr")
+technique_name = "Incense Burner"
+description = "Creates a smokey aura that damages nearby enemies."
+icon = ExtResource("2_8llwu")
+effect_scene = ExtResource("1_yj0hj")
+base_cooldown = 1.3
+base_damage = 5.0
+base_area_size = 1.0
+base_duration = 0.5
+base_attack_count = 1
+base_knockback = 0.0
+base_speed = 300.0
+base_piercing = 1
+base_amount = 1
+base_interval = 0.1
+base_hitbox_delay = 0.0
+base_crit_chance = 0.0
+base_crit_multiplier = 2.0
+base_effect_chance = 0.0
+base_blockable = false
+base_rarity = 1.0
+activation_strategy = SubResource("Resource_gdd6r")
+level_upgrades = Array[ExtResource("1_8dw4c")]([ExtResource("4_l7m0x"), ExtResource("5_lang6"), ExtResource("6_gdd6r"), ExtResource("7_0bnv5"), ExtResource("8_jb0gq"), ExtResource("9_hlivw"), ExtResource("10_egq5v")])
+metadata/_custom_type_script = "uid://ib4wng377xdb"

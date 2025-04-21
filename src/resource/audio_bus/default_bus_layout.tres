@@ -2,8 +2,8 @@
 
 [sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_j3pel"]
 resource_name = "Limiter"
-ceiling_db = -15.0
-threshold_db = -15.0
+ceiling_db = -20.0
+threshold_db = -30.0
 
 [resource]
 bus/1/name = &"SFX"

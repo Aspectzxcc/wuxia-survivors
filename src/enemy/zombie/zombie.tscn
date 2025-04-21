@@ -15,8 +15,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvdax"]
-size = Vector2(32.5, 73)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u36mw"]
+radius = 11.75
+height = 73.0
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
@@ -29,7 +30,7 @@ sprite_frames = SubResource("SpriteFrames_5mipj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.25, -0.5)
-shape = SubResource("RectangleShape2D_mvdax")
+shape = SubResource("CapsuleShape2D_u36mw")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_u36mw")
