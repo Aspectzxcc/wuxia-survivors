@@ -17,6 +17,13 @@ func _ready() -> void:
 	# --- Virtual Joystick Setup ---
 	if not is_instance_valid(virtual_joystick):
 		printerr("LevelUI: Virtual Joystick node not found.")
+
+	if PlatformUtils.is_mobile():
+		# Hide the joystick if on mobile
+		virtual_joystick.scale = Vector2(3, 3) # Scale up for mobile
+	else:
+		# Hide the joystick if not on mobile
+		virtual_joystick.scale = Vector2(1, 1) # Scale down to hide
 	# --- Label Checks ---
 	if not is_instance_valid(fps_label):
 		printerr("LevelUI: FPS Label node not found.")
