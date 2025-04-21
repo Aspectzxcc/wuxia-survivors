@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # --- Node References ---
-@onready var virtual_joystick: Node = $VirtualJoystick
+@onready var virtual_joystick: Node = $Control/VirtualJoystick
 @onready var fps_label: Label = $FPSLabel
 @onready var timer_label: Label = $TimerLabel
 @onready var kill_count_label: Label = $KillCountLabel
