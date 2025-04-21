@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyWaveEntry" load_steps=3 format=3 uid="uid://csrh08rhd4wvf"]
+
+[ext_resource type="Resource" uid="uid://cygyd8637sjqn" path="res://src/resource/enemy/zombie_data.tres" id="1_5pwtv"]
+[ext_resource type="Script" uid="uid://csnc4delcyk16" path="res://src/data/level/enemy_wave_entry.gd" id="1_m3v2a"]
+
+[resource]
+script = ExtResource("1_m3v2a")
+enemy_data = ExtResource("1_5pwtv")
+spawn_chance = 1.0
+bypass_global_limit = false
+metadata/_custom_type_script = "uid://csnc4delcyk16"

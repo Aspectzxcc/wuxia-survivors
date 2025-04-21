@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnx0dv6qi6i78"]
+
+[ext_resource type="Script" uid="uid://nui8hebiswwt" path="res://src/technique/qi_blast/qi_blast.gd" id="1_auxed"]
+[ext_resource type="Texture2D" uid="uid://dprre85v556uf" path="res://assets/sprites/effects/Retro Impact Effect F.png" id="2_02ovi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2ol0"]
+radius = 7.0
+
+[node name="QiBlast" type="Area2D"]
+collision_mask = 4
+script = ExtResource("1_auxed")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_02ovi")
+region_enabled = true
+region_rect = Rect2(89.1977, 1119.23, 16.1227, 17.1742)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s2ol0")
+
+[node name="LifetimeTimer" type="Timer" parent="."]

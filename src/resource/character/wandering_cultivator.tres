@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=5 format=3 uid="uid://ckql2bfu4pk1q"]
+
+[ext_resource type="Script" uid="uid://da7ly0chxm0r6" path="res://src/data/character/character_data.gd" id="1_2nvlq"]
+[ext_resource type="Texture2D" uid="uid://i3vkrmhkaxkl" path="res://icon.svg" id="1_stcig"]
+[ext_resource type="SpriteFrames" uid="uid://2ah1g4v8slft" path="res://src/resource/sprite_frames/wandering_cultivator.tres" id="3_81b43"]
+[ext_resource type="Resource" uid="uid://jhv40245rd1r" path="res://src/resource/technique/wanderers_strike.tres" id="4_sq542"]
+
+[resource]
+script = ExtResource("1_2nvlq")
+character_name = "Wandering Cultivator"
+description = "A lone cultivator honing their skills through constant travel."
+icon = ExtResource("1_stcig")
+sprite_frames = ExtResource("3_81b43")
+max_health = 100.0
+recovery = 0.0
+armor = 0.0
+move_speed = 1.0
+qi_gain = 1.0
+luck = 1.0
+greed = 1.0
+magnet = 32.0
+curse = 1.0
+damage = 1.0
+area_size = 1.0
+speed = 1.0
+duration = 1.0
+amount = 0
+cooldown = 1.0
+growth = 1.0
+revival = 0
+reroll = 0
+skip = 0
+banish = 0
+charm = 0
+defang = 0.0
+seal = 0
+crit_chance = 1.0
+starting_technique = ExtResource("4_sq542")
+metadata/_custom_type_script = "uid://da7ly0chxm0r6"

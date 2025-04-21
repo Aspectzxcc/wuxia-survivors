@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwfxfylp0jgxd"]
+
+[ext_resource type="Script" uid="uid://c8jsqph68kkee" path="res://src/player/player.gd" id="1_rxibo"]
+[ext_resource type="SpriteFrames" uid="uid://2ah1g4v8slft" path="res://src/resource/sprite_frames/wandering_cultivator.tres" id="2_jiejy"]
+[ext_resource type="Resource" uid="uid://ckql2bfu4pk1q" path="res://src/resource/character/wandering_cultivator.tres" id="2_o822w"]
+[ext_resource type="Script" uid="uid://byxfwff5wx0yr" path="res://src/components/health.gd" id="3_mf2ua"]
+[ext_resource type="Script" uid="uid://cm606wi34784w" path="res://src/components/technique_manager.gd" id="4_244u8"]
+[ext_resource type="PackedScene" uid="uid://dlriloi8lb52r" path="res://src/UI/health_bar/health_bar.tscn" id="5_5f2sf"]
+[ext_resource type="Script" uid="uid://bjexbichnxm7s" path="res://src/components/passive_manager.gd" id="5_jiejy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxibo"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mf2ua"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_244u8"]
+radius = 32.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_rxibo")
+character_data = ExtResource("2_o822w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_jiejy")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_rxibo")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_mf2ua")
+
+[node name="MagnetArea" type="Area2D" parent="." groups=["player_magnet"]]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_244u8")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_mf2ua")
+
+[node name="TechniqueManager" type="Node" parent="."]
+script = ExtResource("4_244u8")
+
+[node name="PassiveManager" type="Node" parent="."]
+script = ExtResource("5_jiejy")
+
+[node name="DamageTickTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="HealthBar" parent="." instance=ExtResource("5_5f2sf")]
+offset_left = -15.0
+offset_top = 21.0
+offset_right = 15.0
+offset_bottom = 25.0
+
+[connection signal="timeout" from="DamageTickTimer" to="." method="_on_damage_tick_timer_timeout"]

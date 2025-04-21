@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=5 format=3 uid="uid://cm6ry4ofu3fgt"]
+
+[ext_resource type="Script" uid="uid://b6s8o1cfnuspa" path="res://src/data/stat/stat_modifier.gd" id="1_0uy3o"]
+[ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="2_24e6w"]
+[ext_resource type="Resource" uid="uid://bijmpsr1qn08m" path="res://src/resource/stat_modifier/+10%_tech_area_addP.tres" id="2_p7jm6"]
+[ext_resource type="Resource" uid="uid://7u0mh3w31xo2" path="res://src/resource/stat_modifier/+5_tech_damage_add.tres" id="3_70f40"]
+
+[resource]
+script = ExtResource("2_24e6w")
+level = 6
+description = "+10% Area, +5 Damage"
+modifications = Array[ExtResource("1_0uy3o")]([ExtResource("2_p7jm6"), ExtResource("3_70f40")])
+metadata/_custom_type_script = "uid://cfpfyba7wygbj"

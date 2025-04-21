@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfr2in1t0gmw6"]
+
+[ext_resource type="Script" uid="uid://col4l6fakudlw" path="res://src/UI/qi_bar/qi_bar.gd" id="1_f7wio"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ta5m2"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f7wio"]
+bg_color = Color(0.246227, 0.616636, 0.96704, 1)
+
+[node name="QiBar" type="ProgressBar"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 41.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/background = SubResource("StyleBoxFlat_ta5m2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f7wio")
+value = 50.0
+script = ExtResource("1_f7wio")
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -105.0
+offset_top = -2.0
+offset_right = -25.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 50
+text = "Lvl1"
+horizontal_alignment = 1
+vertical_alignment = 1

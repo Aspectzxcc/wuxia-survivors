@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PassiveData" load_steps=9 format=3 uid="uid://deg1lfll0have"]
+
+[ext_resource type="Texture2D" uid="uid://i3vkrmhkaxkl" path="res://icon.svg" id="1_03ggc"]
+[ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="2_7nysa"]
+[ext_resource type="Resource" uid="uid://c1uo7wqoicavc" path="res://src/resource/level_upgrades/passive/inner_strength_cultivation/isc_level1.tres" id="3_2pp0h"]
+[ext_resource type="Script" uid="uid://b75r76qh048fj" path="res://src/data/passive/passive_data.gd" id="4_5gpke"]
+[ext_resource type="Resource" uid="uid://dpevweun3m33d" path="res://src/resource/level_upgrades/passive/inner_strength_cultivation/isc_level2.tres" id="4_dl8dn"]
+[ext_resource type="Resource" uid="uid://bqe5jtq27ohn6" path="res://src/resource/level_upgrades/passive/inner_strength_cultivation/isc_level3.tres" id="5_wrc3d"]
+[ext_resource type="Resource" uid="uid://30vfax848l85" path="res://src/resource/level_upgrades/passive/inner_strength_cultivation/isc_level4.tres" id="6_d1308"]
+[ext_resource type="Resource" uid="uid://bhyl3q5bhkk3r" path="res://src/resource/level_upgrades/passive/inner_strength_cultivation/isc_level5.tres" id="7_qnvh7"]
+
+[resource]
+script = ExtResource("4_5gpke")
+passive_name = "Inner Strength Cultivation"
+description = "Focus your inner chi to empower yourself, increasing your damage by 10% per level."
+icon = ExtResource("1_03ggc")
+level_upgrades = Array[ExtResource("2_7nysa")]([ExtResource("3_2pp0h"), ExtResource("4_dl8dn"), ExtResource("5_wrc3d"), ExtResource("6_d1308"), ExtResource("7_qnvh7")])
+metadata/_custom_type_script = "uid://b75r76qh048fj"

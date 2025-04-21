@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://c7x6o737dhwat"]
+
+[ext_resource type="Script" uid="uid://csnc4delcyk16" path="res://src/data/level/enemy_wave_entry.gd" id="1_p1ou8"]
+[ext_resource type="Resource" uid="uid://csrh08rhd4wvf" path="res://src/resource/level/enemy_wave_entry/test_level/zombie_wave_entry.tres" id="3_vbc0f"]
+[ext_resource type="Resource" uid="uid://cfvt0675g3pmb" path="res://src/resource/level/enemy_wave_entry/test_level/lizard_wave_entry.tres" id="4_ib7p6"]
+[ext_resource type="Script" uid="uid://msggko7q7niv" path="res://src/data/level/wave_data.gd" id="5_2mpp0"]
+
+[resource]
+script = ExtResource("5_2mpp0")
+time_start = 240.0
+min_concurrent = 20
+spawn_interval = 0.5
+spawn_burst_count = 4
+enemy_entries = Array[ExtResource("1_p1ou8")]([ExtResource("4_ib7p6"), ExtResource("3_vbc0f")])
+metadata/_custom_type_script = "uid://msggko7q7niv"

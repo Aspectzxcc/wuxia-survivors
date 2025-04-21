@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyWaveEntry" load_steps=3 format=3 uid="uid://bbex4r8yprbk"]
+
+[ext_resource type="Script" uid="uid://csnc4delcyk16" path="res://src/data/level/enemy_wave_entry.gd" id="1_jirsh"]
+[ext_resource type="Resource" uid="uid://bktw67dm2fpts" path="res://src/resource/enemy/paper_talisman_data.tres" id="1_svlxc"]
+
+[resource]
+script = ExtResource("1_jirsh")
+enemy_data = ExtResource("1_svlxc")
+spawn_chance = 1.0
+bypass_global_limit = false
+metadata/_custom_type_script = "uid://csnc4delcyk16"

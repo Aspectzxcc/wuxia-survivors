@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelSpawnSequence" load_steps=8 format=3 uid="uid://bvyw6mvu2n7e8"]
+
+[ext_resource type="Script" uid="uid://d1g6be4u4pbyt" path="res://src/data/level/level_spawn_sequence.gd" id="1_a6271"]
+[ext_resource type="Script" uid="uid://msggko7q7niv" path="res://src/data/level/wave_data.gd" id="2_df3e6"]
+[ext_resource type="Resource" uid="uid://ckrttlhmt80cx" path="res://src/resource/level/wave_data/test_level/wave1_data.tres" id="3_df3e6"]
+[ext_resource type="Resource" uid="uid://bmby5dxh3y86r" path="res://src/resource/level/wave_data/test_level/wave0_data.tres" id="3_ef4gm"]
+[ext_resource type="Resource" uid="uid://dc7oa7tsq5rj2" path="res://src/resource/level/wave_data/test_level/wave2_data.tres" id="4_trdsg"]
+[ext_resource type="Resource" uid="uid://braqkgn0wuept" path="res://src/resource/level/wave_data/test_level/wave3_data.tres" id="5_i8ovi"]
+[ext_resource type="Resource" uid="uid://c7x6o737dhwat" path="res://src/resource/level/wave_data/test_level/wave4_data.tres" id="6_6kk3q"]
+
+[resource]
+script = ExtResource("1_a6271")
+waves = Array[ExtResource("2_df3e6")]([ExtResource("3_ef4gm"), ExtResource("3_df3e6"), ExtResource("4_trdsg"), ExtResource("5_i8ovi"), ExtResource("6_6kk3q")])
+metadata/_custom_type_script = "uid://d1g6be4u4pbyt"

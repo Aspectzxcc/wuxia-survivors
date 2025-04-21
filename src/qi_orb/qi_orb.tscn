@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ri7ahcsx4gjy"]
+
+[ext_resource type="Script" uid="uid://u5l2126kkru3" path="res://src/qi_orb/qi_orb.gd" id="1_pi527"]
+[ext_resource type="Texture2D" uid="uid://dor06bt711ma5" path="res://assets/sprites/qi_orb/qi_orb-Photoroom.png" id="2_0ybov"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nq8ko"]
+radius = 8.24621
+
+[node name="QiOrb" type="Area2D"]
+collision_mask = 18
+script = ExtResource("1_pi527")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_0ybov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nq8ko")

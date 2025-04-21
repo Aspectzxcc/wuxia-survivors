@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=4 format=3 uid="uid://bhyl3q5bhkk3r"]
+
+[ext_resource type="Script" uid="uid://b6s8o1cfnuspa" path="res://src/data/stat/stat_modifier.gd" id="1_b3lu5"]
+[ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="2_0wkre"]
+[ext_resource type="Resource" uid="uid://ce1364gisrk1q" path="res://src/resource/stat_modifier/+10%_player_damage_addP.tres" id="2_hvbns"]
+
+[resource]
+script = ExtResource("2_0wkre")
+level = 5
+description = "+10% Damage"
+modifications = Array[ExtResource("1_b3lu5")]([ExtResource("2_hvbns")])
+metadata/_custom_type_script = "uid://cfpfyba7wygbj"

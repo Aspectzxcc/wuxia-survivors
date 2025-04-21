@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://bktw67dm2fpts"]
+
+[ext_resource type="PackedScene" uid="uid://cm1l7nexflk3o" path="res://src/enemy/paper_talisman/paper_talisman.tscn" id="1_77ihd"]
+[ext_resource type="Script" uid="uid://brkoen87x3xcd" path="res://src/data/enemy/enemy_data.gd" id="1_sjt5q"]
+[ext_resource type="PackedScene" uid="uid://ri7ahcsx4gjy" path="res://src/qi_orb/qi_orb.tscn" id="2_lofpx"]
+
+[resource]
+script = ExtResource("1_sjt5q")
+enemy_name = "Paper Talisman Spirit"
+enemy_scene = ExtResource("1_77ihd")
+health = 5.0
+speed = 100.0
+damage = 3.0
+knockback_friction = 5.0
+qi_orb_scene = ExtResource("2_lofpx")
+qi_amount = 1
+metadata/_custom_type_script = "uid://brkoen87x3xcd"

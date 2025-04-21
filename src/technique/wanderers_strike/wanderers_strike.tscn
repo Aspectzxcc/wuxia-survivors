@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://df60gyom65scx"]
+
+[ext_resource type="Script" uid="uid://ck80miqblnrop" path="res://src/technique/wanderers_strike/wanderers_strike.gd" id="1_ovk5b"]
+[ext_resource type="Texture2D" uid="uid://77m60ik8e7kj" path="res://assets/sprites/effects/Retro Impact Effect Pack 3 F.png" id="2_i3hms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saoph"]
+atlas = ExtResource("2_i3hms")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba3cu"]
+atlas = ExtResource("2_i3hms")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf6mg"]
+atlas = ExtResource("2_i3hms")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsnff"]
+atlas = ExtResource("2_i3hms")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irhbk"]
+atlas = ExtResource("2_i3hms")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6jn5"]
+atlas = ExtResource("2_i3hms")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovk5b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saoph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ba3cu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf6mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsnff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irhbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6jn5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pxoj"]
+size = Vector2(100, 50)
+
+[node name="WanderersStrike" type="Area2D"]
+collision_mask = 4
+script = ExtResource("1_ovk5b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ovk5b")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8pxoj")
+
+[node name="DurationTimer" type="Timer" parent="."]

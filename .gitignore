@@ -1,0 +1,28 @@
+# filepath: c:\Users\pc\Desktop\godot\wuxia-survivors\.gitignore
+# Godot 4+ specific ignores
+.godot/
+*.translation
+/android/
+
+# Godot general ignores
+.import/
+export.cfg
+export_presets.cfg
+*.TMP
+*.tres.old
+*.tscn.old
+
+# Mono/C# specific ignores (if you were using C#)
+.mono/
+data_*/
+mono_custom_builds/
+**/bin/
+**/obj/
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+
+# IDE specific ignores
+.vscode/
+.idea/

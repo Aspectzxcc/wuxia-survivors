@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="TechniqueData" load_steps=14 format=3 uid="uid://jhv40245rd1r"]
+
+[ext_resource type="Script" uid="uid://cfpfyba7wygbj" path="res://src/data/level_upgrade/upgrade_data.gd" id="1_0wrpl"]
+[ext_resource type="Texture2D" uid="uid://i3vkrmhkaxkl" path="res://icon.svg" id="1_kta3i"]
+[ext_resource type="PackedScene" uid="uid://df60gyom65scx" path="res://src/technique/wanderers_strike/wanderers_strike.tscn" id="1_mkqh1"]
+[ext_resource type="Script" uid="uid://b3if1aikcnl8j" path="res://src/strategy/technique_activation/alternating_sweep_activation_strategy.gd" id="1_mxw7q"]
+[ext_resource type="Script" uid="uid://ib4wng377xdb" path="res://src/data/technique/technique_data.gd" id="2_0wrpl"]
+[ext_resource type="Resource" uid="uid://cbxi8wbd27kse" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level2.tres" id="5_o57yh"]
+[ext_resource type="Resource" uid="uid://fqjbnum0jy0r" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level3.tres" id="6_tipto"]
+[ext_resource type="Resource" uid="uid://dqvv8x0i8ejfv" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level4.tres" id="7_kjdy5"]
+[ext_resource type="Resource" uid="uid://dijdpjcrrrlm5" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level5.tres" id="8_hkexu"]
+[ext_resource type="Resource" uid="uid://cm6ry4ofu3fgt" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level6.tres" id="9_m4ril"]
+[ext_resource type="Resource" uid="uid://xoshj6p416fu" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level7.tres" id="10_gntwe"]
+[ext_resource type="Resource" uid="uid://ck4el4jt65ekl" path="res://src/resource/level_upgrades/technique/wanderers_strike/ws_level8.tres" id="11_effem"]
+
+[sub_resource type="Resource" id="Resource_mxw7q"]
+script = ExtResource("1_mxw7q")
+horizontal_offset = 40.0
+metadata/_custom_type_script = "uid://b3if1aikcnl8j"
+
+[resource]
+script = ExtResource("2_0wrpl")
+technique_name = "Wanderer's Strike"
+description = "A quick horizontal sweep attack."
+icon = ExtResource("1_kta3i")
+effect_scene = ExtResource("1_mkqh1")
+base_cooldown = 1.5
+base_damage = 10.0
+base_area_size = 1.0
+base_duration = 0.15
+base_attack_count = 1
+base_knockback = 1.0
+base_speed = 300.0
+base_piercing = 1
+base_amount = 1
+base_interval = 0.1
+base_hitbox_delay = 0.0
+base_crit_chance = 0.0
+base_crit_multiplier = 2.0
+base_effect_chance = 0.0
+base_blockable = false
+base_rarity = 1.0
+activation_strategy = SubResource("Resource_mxw7q")
+level_upgrades = Array[ExtResource("1_0wrpl")]([ExtResource("5_o57yh"), ExtResource("6_tipto"), ExtResource("7_kjdy5"), ExtResource("8_hkexu"), ExtResource("9_m4ril"), ExtResource("10_gntwe"), ExtResource("11_effem")])
+metadata/_custom_type_script = "uid://ib4wng377xdb"

@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://bossdgajr6lfs"]
+
+[ext_resource type="Script" uid="uid://bwvb6tsgidryf" path="res://addons/virtual_joystick/scripts/virtual_joystick.gd" id="1_qghu5"]
+[ext_resource type="Script" uid="uid://djjq8rd5g7mis" path="res://src/UI/level_UI/level_ui.gd" id="1_ygpdk"]
+[ext_resource type="Texture2D" uid="uid://bc6paavcnnwf6" path="res://addons/virtual_joystick/sprites/stick_pressed.png" id="2_ygpdk"]
+[ext_resource type="PackedScene" uid="uid://rqvqgo0gykxa" path="res://src/UI/level_up/level_up_ui.tscn" id="3_f0bih"]
+[ext_resource type="PackedScene" uid="uid://cfr2in1t0gmw6" path="res://src/UI/qi_bar/qi_bar.tscn" id="4_4qlhp"]
+[ext_resource type="PackedScene" uid="uid://2t6iqej60h8f" path="res://src/UI/game_over/game_over_ui.tscn" id="5_tdj4t"]
+[ext_resource type="PackedScene" uid="uid://ddhi5dgis4u2b" path="res://src/UI/pause_menu/pause_menu.tscn" id="7_f0bih"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_73glg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i05hd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oblsp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tjyap"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vjvw6"]
+
+[node name="LevelUI" type="CanvasLayer"]
+script = ExtResource("1_ygpdk")
+
+[node name="VirtualJoystick" type="Node2D" parent="." groups=["Joystick"]]
+position = Vector2(963, 528)
+scale = Vector2(2, 2)
+script = ExtResource("1_qghu5")
+stick_pressed = ExtResource("2_ygpdk")
+metadata/_custom_type_script = "uid://bwvb6tsgidryf"
+
+[node name="LevelUpUI" parent="." instance=ExtResource("3_f0bih")]
+visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="QiBar" parent="." instance=ExtResource("4_4qlhp")]
+metadata/_edit_use_anchors_ = true
+
+[node name="FPSLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 84.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "FPS: 123"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TimerLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 45.0
+offset_right = 27.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" parent="." instance=ExtResource("5_tdj4t")]
+visible = false
+
+[node name="KillCountLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 45.0
+offset_right = -10.0
+offset_bottom = 107.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 60
+text = "Kills: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 120.0
+offset_right = -16.0
+offset_bottom = 201.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 80
+theme_override_styles/focus = SubResource("StyleBoxEmpty_73glg")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_i05hd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_oblsp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tjyap")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vjvw6")
+text = "||"
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_f0bih")]
+process_mode = 0
+visible = false

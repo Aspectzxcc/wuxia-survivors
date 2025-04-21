@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://copmksnpkvccj"]
+
+[ext_resource type="Script" uid="uid://cflnrityrnhdy" path="res://src/enemy/enemy.gd" id="1_yxa8l"]
+[ext_resource type="Texture2D" uid="uid://jh1tbh1tmxu1" path="res://assets/sprites/enemy/Skeleton.png" id="2_b8bl1"]
+[ext_resource type="Script" uid="uid://byxfwff5wx0yr" path="res://src/components/health.gd" id="3_b8bl1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xso4u"]
+atlas = ExtResource("2_b8bl1")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1xhc"]
+atlas = ExtResource("2_b8bl1")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4y1u"]
+atlas = ExtResource("2_b8bl1")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uydu6"]
+atlas = ExtResource("2_b8bl1")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ll8s5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xso4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1xhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4y1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uydu6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8bl1"]
+radius = 15.0
+height = 63.0
+
+[node name="Skeleton" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 14
+script = ExtResource("1_yxa8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_ll8s5")
+autoplay = "default"
+frame = 1
+frame_progress = 0.628871
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_b8bl1")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_b8bl1")
