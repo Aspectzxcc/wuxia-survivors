@@ -76,9 +76,6 @@ func _on_damage_timer_timeout() -> void:
 
         if is_still_overlapping:
             _apply_damage(enemy)
-        else:
-            # Enemy is no longer overlapping, remove from tracking
-            _enemies_in_area.erase(enemy)
 
 func _apply_damage(enemy: Enemy) -> void:
     if enemy.has_method("handle_hit"):
