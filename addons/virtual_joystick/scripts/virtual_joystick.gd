@@ -7,7 +7,14 @@ signal analogic_released
 
 @export_group("Settings")
 @export var normalized: bool = true
-@export var zero_at_touch: bool = false
+@export var zero_at_touch: bool = false:
+	set(value):
+		zero_at_touch = value
+		if Engine.is_editor_hint(): return # Don't run visibility logic in editor
+		if zero_at_touch and is_inside_tree():
+			hide() # Start hidden if zero_at_touch is true
+		elif is_inside_tree():
+			show() # Ensure visible otherwise
 
 @export_group("Sprites")
 @export var border: Texture2D:
@@ -30,8 +37,7 @@ var ongoing_drag := -1
 var return_accel := 20
 var threshold := 10
 var is_pressed = false
-@onready var default_global_position = global_position
-
+var default_global_position: Vector2 # Store initial position
 
 func _draw() -> void:	
 	if get_child_count() == 0:
@@ -45,6 +51,7 @@ func _draw() -> void:
 
 
 func _ready() -> void:	
+	default_global_position = global_position # Store initial position here
 	touch.position = -radius
 	touch.released.connect(analogic_released.emit)
 
@@ -56,49 +63,108 @@ func _ready() -> void:
 	if stick_pressed == null:
 		stick_pressed = preload("res://addons/virtual_joystick/sprites/stick_pressed.png")
 	
+	# Set initial visibility based on zero_at_touch
+	if zero_at_touch:
+		hide()
+	else:
+		show()
 
 func _process(delta: float) -> void:
-	if ongoing_drag == -1:
+	# Only return joystick if not zero_at_touch and not being dragged
+	if not zero_at_touch and ongoing_drag == -1:
 		var pos_difference = (Vector2.ZERO - radius) - touch.position
-		touch.position += pos_difference * return_accel * delta * 2
+		# Only animate return if not already centered
+		if pos_difference.length_squared() > 0.1:
+			touch.position += pos_difference * return_accel * delta * 2
+		else:
+			touch.position = -radius # Snap to center
 		
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventScreenDrag or ( event is InputEventScreenTouch and event.is_pressed()):
-		var event_dist_from_center = (event.position - global_position).length()
-
-		if event_dist_from_center <= boundary * global_scale.x or event.get_index() == ongoing_drag:
-			if !is_pressed:
+	if event is InputEventScreenTouch and event.is_pressed():
+		# Handle new touch
+		if ongoing_drag == -1: # Only process if not already dragging another finger
+			if zero_at_touch:
+				# --- Zero At Touch Logic ---
+				# 1. Move the entire joystick base to the touch location
+				global_position = event.position
+				# 2. Reset the inner stick sprite to the center of the base
+				touch.position = -radius
+				# 3. Make the joystick visible
+				show()
+				# 4. Set state variables
 				is_pressed = true
-				emit_signal("analogic_just_pressed")
-				
+				ongoing_drag = event.get_index()
+				# 5. Update texture and emit signal
 				touch.texture_normal = stick_pressed
-				
-				if zero_at_touch:
-					global_position = event.position
-			
-			touch.global_position = event.position - radius * global_scale
-			
-			if get_button_pos().length() > boundary:
-				touch.position = get_button_pos().normalized() * boundary - radius
-
-			ongoing_drag = event.get_index()
-			if normalized:
-				analogic_change.emit(get_value())
+				emit_signal("analogic_just_pressed")
+				# 6. Process the initial touch position relative to the new center
+				#    (This will calculate the initial offset if the finger isn't exactly centered)
+				#    We pass the same event.position which _handle_drag uses
+				_handle_drag(event.position)
+				# --- End Zero At Touch Logic ---
 			else:
-				analogic_change.emit(get_value() * min (get_button_pos().length() / boundary, 1))
-				
-							
+				# --- Fixed Position Logic ---
+				var event_dist_from_center = (event.position - global_position).length()
+				if event_dist_from_center <= boundary * global_scale.x:
+					is_pressed = true
+					ongoing_drag = event.get_index()
+					touch.texture_normal = stick_pressed
+					emit_signal("analogic_just_pressed")
+					# Process initial position and emit change
+					_handle_drag(event.position)
+				# --- End Fixed Position Logic ---
+
+	elif event is InputEventScreenDrag:
+		# Handle ongoing drag
+		if event.get_index() == ongoing_drag:
+			# Ensure visibility if it somehow got hidden (belt-and-suspenders)
+			if zero_at_touch and not is_visible_in_tree():
+				show()
+			_handle_drag(event.position)
+
+	elif event is InputEventScreenTouch and not event.is_pressed():
+		# Handle touch release
+		if event.get_index() == ongoing_drag:
+			ongoing_drag = -1
+			is_pressed = false
+			analogic_change.emit(Vector2.ZERO)
+			emit_signal("analogic_released") # Emit released signal
+			touch.texture_normal = stick if is_instance_valid(stick) else preload("res://addons/virtual_joystick/sprites/stick.png")
+
+			if zero_at_touch:
+				hide() # Hide joystick
+				# Reset touch position for next appearance
+				touch.position = -radius
+				# Optional: Reset global_position back to default if desired,
+				# but hiding it is usually enough.
+				# global_position = default_global_position
+			else:
+				# Let _process handle the return animation for fixed joystick
+				pass # global_position remains default_global_position
 
 
-	if event is InputEventScreenTouch and not event.is_pressed() and event.get_index() == ongoing_drag:
-		ongoing_drag = -1
-		analogic_change.emit(Vector2.ZERO)
-		global_position = default_global_position
-		is_pressed = false
-		touch.texture_normal = stick if is_instance_valid(stick) else preload("res://addons/virtual_joystick/sprites/stick.png")
-		
-		
+# Helper function to handle position update and signal emission during drag
+func _handle_drag(event_position: Vector2) -> void:
+	# Calculate where the stick sprite *should* be globally based on finger position
+	var target_stick_global_pos = event_position - radius * global_scale
+	# Convert that global position to the local position relative to the joystick base
+	touch.global_position = target_stick_global_pos
+
+	# Clamp touch position (relative to base) within boundary
+	var button_pos = get_button_pos() # This is touch.position + radius
+	if button_pos.length() > boundary:
+		# Calculate the clamped position relative to the base center
+		var clamped_relative_pos = button_pos.normalized() * boundary
+		# Set the touch sprite's position relative to the base
+		touch.position = clamped_relative_pos - radius
+
+	# Emit the value
+	var value = get_value()
+	if not normalized:
+		# Use the potentially clamped position's length for magnitude scaling
+		value *= min(get_button_pos().length() / boundary, 1.0)
+	analogic_change.emit(value)
 
 func get_button_pos() -> Vector2:
 	return touch.position + radius

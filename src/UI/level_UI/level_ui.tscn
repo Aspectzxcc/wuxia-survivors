@@ -21,22 +21,10 @@
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_ygpdk")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchor_left = 0.851
-anchor_top = 0.815
-anchor_right = 0.851
-anchor_bottom = 0.815
-offset_left = -0.280029
-offset_top = 0.199951
-offset_right = 39.72
-offset_bottom = 40.2
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VirtualJoystick" type="Node2D" parent="Control" groups=["Joystick"]]
-scale = Vector2(1.5, 1.5)
+[node name="VirtualJoystick" type="Node2D" parent="." groups=["Joystick"]]
+position = Vector2(1089, 587)
 script = ExtResource("1_qghu5")
+zero_at_touch = true
 stick_pressed = ExtResource("2_ygpdk")
 metadata/_custom_type_script = "uid://bwvb6tsgidryf"
 

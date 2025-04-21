@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # --- Node References ---
-@onready var virtual_joystick: Node = $Control/VirtualJoystick
+@onready var virtual_joystick: Node = $VirtualJoystick
 @onready var fps_label: Label = $FPSLabel
 @onready var timer_label: Label = $TimerLabel
 @onready var kill_count_label: Label = $KillCountLabel
@@ -17,13 +17,6 @@ func _ready() -> void:
 	# --- Virtual Joystick Setup ---
 	if not is_instance_valid(virtual_joystick):
 		printerr("LevelUI: Virtual Joystick node not found.")
-	elif PlatformUtils.is_mobile():
-		virtual_joystick.show()
-		virtual_joystick.process_mode = Node.PROCESS_MODE_INHERIT
-	else:
-		virtual_joystick.hide()
-		virtual_joystick.process_mode = Node.PROCESS_MODE_DISABLED
-
 	# --- Label Checks ---
 	if not is_instance_valid(fps_label):
 		printerr("LevelUI: FPS Label node not found.")
