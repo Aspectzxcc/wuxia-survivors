@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://bom5ml07rlxr0"]
+
+[ext_resource type="Script" uid="uid://cbxpsb33jpdgb" path="res://addons/godot_resource_groups/resource_group.gd" id="1_ygpdq"]
+
+[resource]
+script = ExtResource("1_ygpdq")
+base_folder = "res://src/resource/passive"
+includes = Array[String](["*.tres"])
+excludes = Array[String]([])
+paths = Array[String](["res://src/resource/passive/inner_strength_cultivation.tres"])
+metadata/_custom_type_script = "uid://cbxpsb33jpdgb"

@@ -41,11 +41,15 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/virtual_joystick/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
 
 [global_group]
 
 Enemy=""
+
+[godot_resource_groups]
+
+auto_rebuild=true
 
 [gui]
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://dawapgu441cpq"]
+
+[ext_resource type="Script" uid="uid://cbxpsb33jpdgb" path="res://addons/godot_resource_groups/resource_group.gd" id="1_rrwbt"]
+
+[resource]
+script = ExtResource("1_rrwbt")
+base_folder = "res://src/resource/technique"
+includes = Array[String](["*.tres"])
+excludes = Array[String]([])
+paths = Array[String](["res://src/resource/technique/incense_burner.tres", "res://src/resource/technique/qi_blast.tres", "res://src/resource/technique/wanderers_strike.tres"])
+metadata/_custom_type_script = "uid://cbxpsb33jpdgb"
