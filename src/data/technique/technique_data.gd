@@ -1,5 +1,12 @@
 class_name TechniqueData extends Resource
 
+# --- Runtime State (Not saved in the resource file) ---
+# These are managed by the TechniqueManager when an instance is active
+var level: int = 1
+var cooldown_progress: float = 0.0
+var calculated_stats: Dictionary = {} # Stores stats calculated based on current level and player stats
+
+# --- Configuration (Saved in the resource file) ---
 @export var technique_name: String = "Unnamed Technique"
 @export var description: String = ""
 @export var icon: Texture

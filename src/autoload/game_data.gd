@@ -15,3 +15,9 @@ func _ready():
     # load all passives
     all_passives.load_all_into(_all_passives)
     print("GameData: Loaded all passives: ", _all_passives.size())
+
+func get_all_techniques() -> Array[TechniqueData]:
+    return _all_techniques
+
+func get_all_passives() -> Array[PassiveData]:
+    return _all_passives

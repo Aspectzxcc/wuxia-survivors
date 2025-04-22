@@ -178,12 +178,12 @@ func _on_upgrade_selected(selected_upgrade_data: Dictionary) -> void:
 	
 	# Apply selected upgrade
 	var upgrade_type = selected_upgrade_data.get("type", UpgradeType.UNKNOWN) 
-	var upgrade_id = selected_upgrade_data.get("id") # Resource path of the upgrade
+	var upgrade_resource = selected_upgrade_data.get("resource") # Contains the actual resource
 
-	if upgrade_id == null:
-		printerr("Player: Upgrade selected data is missing 'id' (resource path).")
+	if upgrade_resource == null:
+		printerr("Player: Upgrade selected data is missing 'resource'.")
 		return
-
+		
 	# Ensure managers are valid before matching
 	if not is_instance_valid(technique_manager):
 		printerr("Player: TechniqueManager node is missing or invalid.")
@@ -195,55 +195,61 @@ func _on_upgrade_selected(selected_upgrade_data: Dictionary) -> void:
 	match upgrade_type: 
 		UpgradeType.TECHNIQUE_UPGRADE:
 			if is_instance_valid(technique_manager):
-				var tech_data = load(upgrade_id) 
-				if tech_data is TechniqueData:
-					technique_manager.level_up_technique(tech_data)
+				# --- MODIFIED: Use the resource directly ---
+				if upgrade_resource is TechniqueData:
+					technique_manager.level_up_technique(upgrade_resource)
 				else:
-					printerr("Player: Failed to load TechniqueData for upgrade: ", upgrade_id)
+					printerr("Player: Provided resource for TECHNIQUE_UPGRADE is not TechniqueData: ", upgrade_resource)
+				# --- END MODIFICATION ---
 			else:
 				printerr("Player: TechniqueManager not found for upgrade.")
 				
 		UpgradeType.NEW_TECHNIQUE:
 			if is_instance_valid(technique_manager):
-				var tech_data = load(upgrade_id) 
-				if tech_data is TechniqueData:
+				# --- MODIFIED: Use the resource directly ---
+				if upgrade_resource is TechniqueData:
 					if technique_manager.has_method("add_technique"):
-						technique_manager.add_technique(tech_data)
+						technique_manager.add_technique(upgrade_resource)
 					else:
 						printerr("Player: TechniqueManager is missing the 'add_technique' method.")
 				else:
-					printerr("Player: Failed to load TechniqueData for new technique: ", upgrade_id)
+					printerr("Player: Provided resource for NEW_TECHNIQUE is not TechniqueData: ", upgrade_resource)
+				# --- END MODIFICATION ---
 			else:
 				printerr("Player: TechniqueManager not found for new technique.")
 
 		UpgradeType.PASSIVE_UPGRADE:
 			if is_instance_valid(passive_manager):
-				var passive_data = load(upgrade_id)
-				if passive_data is PassiveData:
-					if passive_manager.level_up_passive(passive_data):
+				# --- MODIFIED: Use the resource directly ---
+				if upgrade_resource is PassiveData:
+					if passive_manager.level_up_passive(upgrade_resource):
 						# Successfully leveled up, re-collect all modifiers
 						_collect_all_modifiers()
 						_recalculate_all_stats()
 				else:
-					printerr("Player: Failed to load PassiveData for upgrade: ", upgrade_id)
+					printerr("Player: Provided resource for PASSIVE_UPGRADE is not PassiveData: ", upgrade_resource)
+				# --- END MODIFICATION ---
 			else:
 				printerr("Player: PassiveManager not found for passive upgrade.")
 
 		UpgradeType.NEW_PASSIVE:
 			if is_instance_valid(passive_manager):
-				var passive_data = load(upgrade_id)
-				if passive_data is PassiveData:
-					if passive_manager.add_passive(passive_data):
+				# --- MODIFIED: Use the resource directly ---
+				if upgrade_resource is PassiveData:
+					if passive_manager.add_passive(upgrade_resource):
 						# Successfully added, re-collect all modifiers
 						_collect_all_modifiers()
 						_recalculate_all_stats()
 				else:
-					printerr("Player: Failed to load PassiveData for new passive: ", upgrade_id)
+					printerr("Player: Provided resource for NEW_PASSIVE is not PassiveData: ", upgrade_resource)
+				# --- END MODIFICATION ---
 			else:
 				printerr("Player: PassiveManager not found for new passive.")
 
 		_: # Handles UpgradeType.UNKNOWN or any unexpected value
-			printerr("Player: Unknown or invalid upgrade type selected: ", upgrade_type, " with ID: ", upgrade_id)
+			# --- MODIFIED: Update error message ---
+			printerr("Player: Unknown or invalid upgrade type selected: ", upgrade_type, " with resource: ", upgrade_resource)
+			# --- END MODIFICATION ---
 
 # --- Stat Management Functions ---
 
@@ -254,20 +260,17 @@ func _collect_all_modifiers() -> void:
 		printerr("Player: Cannot collect modifiers, PassiveManager is invalid.")
 		return
 
-	var current_active_passives: Dictionary = passive_manager.get_active_passives() # format { PassiveData: {"level": int} }
+	var current_active_passives: Array[PassiveData] = passive_manager.get_active_passives() # format { PassiveData: {"level": int} }
 	for passive_data in current_active_passives:
 		if not is_instance_valid(passive_data) or not passive_data is PassiveData:
 			printerr("Player: Invalid key found in active passives dictionary.")
 			continue
 
-		var passive_state = current_active_passives[passive_data]
-		var current_passive_level = passive_state.get("level", 0)
-
-		if current_passive_level <= 0:
+		if passive_data.level <= 0:
 			continue
 
 		# Get modifiers for all levels up to the current one
-		for level_to_check in range(1, current_passive_level + 1):
+		for level_to_check in range(1, passive_data.level + 1):
 			var upgrade_data: UpgradeData = passive_data.get_upgrade_for_level(level_to_check)
 			if is_instance_valid(upgrade_data) and upgrade_data.has_method("get_modifications"):
 				var mods_this_level: Array = upgrade_data.get_modifications()

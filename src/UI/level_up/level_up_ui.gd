@@ -1,7 +1,5 @@
 extends Control
 
-signal upgrade_selected(selected_upgrade_data)
-
 # References to the UpgradeOptionCard buttons
 @onready var option_card_1: Button = $PanelContainer/VBoxContainer/UpgradeOptionCard
 @onready var option_card_2: Button = $PanelContainer/VBoxContainer/UpgradeOptionCard2

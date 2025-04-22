@@ -17,70 +17,73 @@ func generate_upgrade_options(player: Node, num_options: int = 3) -> Array[Dicti
 		# Decide if you want to return [] or continue without passive options
 
 	var possible_options: Array[Dictionary] = []
-	var active_techs: Dictionary = {}
-	var active_passives: Dictionary = {}
+	# Assume get_active_techniques/passives now return Array[TechniqueData] / Array[PassiveData]
+	var active_techs: Array[TechniqueData] = []
+	var active_passives: Array[PassiveData] = []
 
 	if is_instance_valid(technique_manager):
 		active_techs = technique_manager.get_active_techniques()
 	if is_instance_valid(passive_manager):
-		active_passives = passive_manager.get_active_passives() # Get active passives
+		active_passives = passive_manager.get_active_passives()
 
 	# --- Option Type 1: Upgrade Existing Techniques ---
 	if is_instance_valid(technique_manager):
 		for tech_data in active_techs:
-			var current_level = active_techs[tech_data]["level"]
+			# Assume TechniqueManager has a method to get the current level
+			var current_level: int = tech_data.level
 			var next_level_upgrade = tech_data.get_upgrade_for_level(current_level + 1)
 			if next_level_upgrade:
-				# Assuming TechniqueUpgradeData has a description field
 				possible_options.append({
 					"name": "Upgrade %s (L%d)" % [tech_data.technique_name, current_level + 1],
 					"description": next_level_upgrade.description,
-					"icon": tech_data.icon, # Add icon
+					"icon": tech_data.icon,
 					"type": Enums.UpgradeType.TECHNIQUE_UPGRADE,
-					"id": tech_data.resource_path
+					"resource": tech_data # Store the resource itself
 				})
 
 	# --- Option Type 2: Learn New Techniques ---
 	if is_instance_valid(technique_manager):
-		for tech_data in GameData.all_techniques:
+		for tech_data in GameData.get_all_techniques():
+			# Check if the TechniqueData resource itself is in the active array
 			if not active_techs.has(tech_data):
 				possible_options.append({
 					"name": "Learn %s" % tech_data.technique_name,
 					"description": tech_data.description,
-					"icon": tech_data.icon, # Add icon
+					"icon": tech_data.icon,
 					"type": Enums.UpgradeType.NEW_TECHNIQUE,
-					"id": tech_data.resource_path
+					"resource": tech_data # Store the resource itself
 				})
 
 	# --- Option Type 3: Upgrade Existing Passives ---
 	if is_instance_valid(passive_manager):
 		for passive_data in active_passives:
-			var current_level = active_passives[passive_data]["level"]
+			# Assume PassiveManager has a method to get the current level
+			var current_level: int = passive_data.level
 			var next_level_upgrade = passive_data.get_upgrade_for_level(current_level + 1)
 			if next_level_upgrade:
 				possible_options.append({
 					"name": "Upgrade %s (L%d)" % [passive_data.passive_name, current_level + 1],
 					"description": next_level_upgrade.description,
-					"icon": passive_data.icon, # Add icon
-					"type": Enums.UpgradeType.PASSIVE_UPGRADE, # Use specific Enum
-					"id": passive_data.resource_path
+					"icon": passive_data.icon,
+					"type": Enums.UpgradeType.PASSIVE_UPGRADE,
+					"resource": passive_data # Store the resource itself
 				})
 
 	# --- Option Type 4: Learn New Passives ---
 	if is_instance_valid(passive_manager):
-		for passive_data in GameData.all_passives:
+		for passive_data in GameData.get_all_passives():
+			# Check if the PassiveData resource itself is in the active array
 			if not active_passives.has(passive_data):
-				 # Check if level 1 upgrade exists before offering
 				var level_1_upgrade = passive_data.get_upgrade_for_level(1)
 				if level_1_upgrade:
 					possible_options.append({
 						"name": "Learn %s" % passive_data.passive_name,
 						"description": passive_data.description,
-						"icon": passive_data.icon, # Add icon
-						"type": Enums.UpgradeType.NEW_PASSIVE, # Use specific Enum
-						"id": passive_data.resource_path
+						"icon": passive_data.icon,
+						"type": Enums.UpgradeType.NEW_PASSIVE,
+						"resource": passive_data # Store the resource itself
 					})
-					
+
 	# --- Select and Return ---
 	possible_options.shuffle()
 

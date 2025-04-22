@@ -1,6 +1,8 @@
 extends Resource
 class_name PassiveData
 
+var level: int = 1 # Current level of the passive
+
 @export var passive_name: String = "Passive Name"
 @export var description: String = "Passive Description"
 @export var icon: Texture2D
