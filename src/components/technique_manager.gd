@@ -8,6 +8,7 @@ var active_techniques: Array[TechniqueData] = []
 var player_node: Player
 
 const StatType = Enums.StatType # Use unified StatType
+const UpgradeType = Enums.UpgradeType
 
 func _ready() -> void:
 	# Attempt to get the player node (assuming TechniqueManager is a child of Player)
@@ -19,6 +20,7 @@ func _ready() -> void:
 		return
 
 	player_node.player_stats_updated.connect(_on_player_stats_updated)
+	GlobalEvents.upgrade_selected.connect(_on_upgrade_selected)
 
 func add_technique(technique_data: TechniqueData) -> bool:
 	if not is_instance_valid(technique_data):
@@ -144,12 +146,17 @@ func _update_technique_stats(technique_instance: TechniqueData) -> void:
 func _on_player_stats_updated() -> void:
 	# Recalculate all active techniques when player stats are updated
 	for technique_instance in active_techniques:
-		if not is_instance_valid(technique_instance):
-			# Error already printed in _process, maybe skip redundant message here
-			continue
-		if not technique_instance is TechniqueData:
-			# Error already printed in _process
-			continue
-
 		_update_technique_stats(technique_instance)
 
+func _on_upgrade_selected(selected_upgrade_data: Dictionary) -> void: 
+	var upgrade_type: UpgradeType = selected_upgrade_data.get("type", UpgradeType.UNKNOWN) 
+	if UpgradeType.keys()[upgrade_type].contains("TECHNIQUE") == false:
+		return
+
+	var upgrade_resource: TechniqueData = selected_upgrade_data.get("resource")
+
+	match upgrade_type: 
+		UpgradeType.TECHNIQUE_UPGRADE:
+			level_up_technique(upgrade_resource)
+		UpgradeType.NEW_TECHNIQUE:
+			add_technique(upgrade_resource)

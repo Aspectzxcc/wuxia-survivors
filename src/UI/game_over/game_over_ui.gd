@@ -39,5 +39,4 @@ func _on_main_menu_button_pressed() -> void:
 
 # Function called when the global player_died signal is emitted
 func _on_player_died() -> void:
-    print("GameOverUI: Received GlobalEvents.player_died signal.")
     show_ui()

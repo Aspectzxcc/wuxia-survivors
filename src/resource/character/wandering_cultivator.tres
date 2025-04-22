@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=5 format=3 uid="uid://ckql2bfu4pk1q"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=6 format=3 uid="uid://ckql2bfu4pk1q"]
 
 [ext_resource type="Script" uid="uid://da7ly0chxm0r6" path="res://src/data/character/character_data.gd" id="1_2nvlq"]
 [ext_resource type="Texture2D" uid="uid://i3vkrmhkaxkl" path="res://icon.svg" id="1_stcig"]
 [ext_resource type="SpriteFrames" uid="uid://2ah1g4v8slft" path="res://src/resource/sprite_frames/wandering_cultivator.tres" id="3_81b43"]
+[ext_resource type="Script" uid="uid://ib4wng377xdb" path="res://src/data/technique/technique_data.gd" id="4_r4x4m"]
 [ext_resource type="Resource" uid="uid://jhv40245rd1r" path="res://src/resource/technique/wanderers_strike.tres" id="4_sq542"]
 
 [resource]
@@ -35,5 +36,5 @@ charm = 0
 defang = 0.0
 seal = 0
 crit_chance = 1.0
-starting_technique = ExtResource("4_sq542")
+starting_techniques = Array[ExtResource("4_r4x4m")]([ExtResource("4_sq542")])
 metadata/_custom_type_script = "uid://da7ly0chxm0r6"

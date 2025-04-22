@@ -42,4 +42,4 @@ extends Resource
 @export_group("") # End Stat Group
 
 ## The initial technique the character starts with.
-@export var starting_technique: TechniqueData
+@export var starting_techniques: Array[TechniqueData] = []

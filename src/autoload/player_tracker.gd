@@ -27,7 +27,6 @@ func update_position(new_position: Vector2) -> void:
 
 # Optional: Called when the player node is about to be removed
 func _on_player_exiting():
-	print("PlayerTracker: Player exiting.")
 	player_node = null
 	is_player_valid = false
 	# Optional: Reset position or leave it where it was last seen?
