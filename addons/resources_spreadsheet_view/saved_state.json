@@ -1,0 +1,21 @@
+{
+  "column_properties": {
+    "res://src/resource/technique/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    }
+  },
+  "recent_paths": [
+    "res://src/resource/technique/"
+  ],
+  "table_functions": {
+
+  }
+}
