@@ -49,14 +49,6 @@ func level_up_technique(technique_data: TechniqueData) -> bool:
 		printerr("TechniqueManager: Tried to level up technique '", technique_data.technique_name, "' which is not active.")
 		return false
 
-func has_technique(technique_data: TechniqueData) -> bool:
-	return active_techniques.has(technique_data)
-
-func get_technique_level(technique_data: TechniqueData) -> int:
-	if active_techniques.has(technique_data):
-		return active_techniques[technique_data].get("level", 0)
-	return 0
-
 func get_active_techniques() -> Dictionary:
 	# Returns the full dictionary { TechniqueData: {"level": int, "cooldown_progress": float} }
 	return active_techniques

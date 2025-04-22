@@ -41,17 +41,6 @@ func level_up_passive(passive_data: PassiveData) -> bool:
         printerr("PassiveManager: Tried to level up passive '", passive_data.passive_name, "' which is not active.")
         return false
 
-# Checks if a specific passive is currently active.
-func has_passive(passive_data: PassiveData) -> bool:
-    return active_passives.has(passive_data)
-
-# Gets the current level of a specific passive.
-# Returns 0 if the passive is not active.
-func get_passive_level(passive_data: PassiveData) -> int:
-    if active_passives.has(passive_data):
-        return active_passives[passive_data].get("level", 0)
-    return 0
-
 # Returns the dictionary containing all active passives and their levels.
 func get_active_passives() -> Dictionary:
     # Returns the full dictionary { PassiveData: {"level": int} }
