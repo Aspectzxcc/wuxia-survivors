@@ -73,7 +73,7 @@ func _activate_wave(wave_index: int):
 
 	current_wave_index = wave_index
 	active_wave = level_spawn_sequence.waves[current_wave_index]
-	active_wave._spawn_timer = 0.0
+	active_wave.spawn_timer = 0.0
 	print("Activating Wave ", current_wave_index, " at time ", GameTimer.get_formatted_time())
 
 
@@ -82,10 +82,10 @@ func _process_active_wave(delta: float):
 		printerr("Active wave became invalid during processing.")
 		return
 
-	active_wave._spawn_timer += delta
+	active_wave.spawn_timer += delta
 
-	if active_wave._spawn_timer >= active_wave.spawn_interval:
-		active_wave._spawn_timer -= active_wave.spawn_interval
+	if active_wave.spawn_timer >= active_wave.spawn_interval:
+		active_wave.spawn_timer -= active_wave.spawn_interval
 
 		active_wave.enemy_entries.shuffle()
 

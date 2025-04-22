@@ -21,4 +21,4 @@ extends Resource
 # @export var map_events: Array[MapEventData] = []
 
 # --- Internal state for the spawner ---
-var _spawn_timer: float = 0.0 # Tracks time until next spawn attempt for this wave
+var spawn_timer: float = 0.0 # Tracks time until next spawn attempt for this wave
