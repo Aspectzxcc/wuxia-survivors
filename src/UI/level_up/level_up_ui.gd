@@ -23,7 +23,7 @@ extends Control
 # Add @onready var icon_3: TextureRect = $PanelContainer/VBoxContainer/UpgradeOptionCard3/HBoxContainer/TechniqueIcon if needed
 # Add @onready var new_label_3: Label = $PanelContainer/VBoxContainer/UpgradeOptionCard3/HBoxContainer/NewLabel if needed
 
-var current_options_data: Array = []
+var options_data: Array[Dictionary] = []
 
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -36,8 +36,8 @@ func _ready() -> void:
 
     GlobalEvents.player_leveled_up.connect(show_ui)
 
-func show_ui(options_data: Array[Dictionary]):
-    current_options_data = options_data
+func show_ui(player: Player):
+    options_data = UpgradeGenerator.generate_upgrade_options(player, 3)
 
     # Option 1
     if options_data.size() > 0 and options_data[0] != null:
@@ -83,8 +83,8 @@ func hide_ui() -> void:
     get_tree().paused = false
 
 func _on_option_button_pressed(option_index: int):
-    if option_index >= 0 and option_index < current_options_data.size() and current_options_data[option_index] != null:
-        var chosen_option_data = current_options_data[option_index]
+    if option_index >= 0 and option_index < options_data.size() and options_data[option_index] != null:
+        var chosen_option_data = options_data[option_index]
 
         GlobalEvents.upgrade_selected.emit(chosen_option_data)
 

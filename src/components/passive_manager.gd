@@ -12,8 +12,6 @@ func add_passive(passive_data: PassiveData) -> bool:
 		return false
 
 	if not active_passives.has(passive_data):
-		# Ensure the passive starts at level 1 when added
-		passive_data.level = 1
 		active_passives.append(passive_data)
 		print("PassiveManager: Added passive '", passive_data.passive_name, "' at Level ", passive_data.level)
 		return true

@@ -20,39 +20,25 @@ func _ready() -> void:
 
 	player_node.player_stats_updated.connect(_on_player_stats_updated)
 
-func add_technique(technique_data_resource: TechniqueData) -> bool:
-	if not is_instance_valid(technique_data_resource):
-		printerr("TechniqueManager: Tried to add invalid technique data resource!")
+func add_technique(technique_data: TechniqueData) -> bool:
+	if not is_instance_valid(technique_data):
+		printerr("TechniqueManager: Tried to add invalid technique data!")
 		return false
+		
+	if not active_techniques.has(technique_data):
+		active_techniques.append(technique_data)
+		print("TechniqueManager: Added technique '", technique_data.technique_name, "' at Level 1.")
+		# Calculate initial stats using the player reference
+		_update_technique_stats(technique_data)
+		return true
+	return false
 
-	# Check if a technique of this type is already active (using resource path as unique ID)
-	if _find_active_technique(technique_data_resource.resource_path) != null:
-		printerr("TechniqueManager: Technique '", technique_data_resource.technique_name, "' is already active.")
-		return false
-
-	# IMPORTANT: Duplicate the resource to create a unique instance with its own state
-	var technique_instance = technique_data_resource.duplicate() as TechniqueData
-	if not is_instance_valid(technique_instance):
-		printerr("TechniqueManager: Failed to duplicate technique data resource!")
-		return false
-
-	# Initialize runtime state on the new instance
-	technique_instance.level = 1
-	technique_instance.cooldown_progress = 0.0
-	technique_instance.calculated_stats = {} # Ensure it starts empty
-
-	active_techniques.append(technique_instance)
-	print("TechniqueManager: Added technique '", technique_instance.technique_name, "' at Level 1.")
-	# Calculate initial stats for the instance
-	_update_technique_stats(technique_instance)
-	return true
-
-func level_up_technique(technique_data_resource: TechniqueData) -> bool:
-	if not is_instance_valid(technique_data_resource):
+func level_up_technique(technique_data: TechniqueData) -> bool:
+	if not is_instance_valid(technique_data):
 		printerr("TechniqueManager: Tried to level up invalid technique data resource!")
 		return false
 
-	var technique_instance = _find_active_technique(technique_data_resource.resource_path)
+	var technique_instance = _find_active_technique(technique_data.resource_path)
 	if technique_instance != null:
 		technique_instance.level += 1
 		print("TechniqueManager: Leveled up '", technique_instance.technique_name, "' to Level ", technique_instance.level)
@@ -60,7 +46,7 @@ func level_up_technique(technique_data_resource: TechniqueData) -> bool:
 		_update_technique_stats(technique_instance)
 		return true
 	else:
-		printerr("TechniqueManager: Tried to level up technique '", technique_data_resource.technique_name, "' which is not active.")
+		printerr("TechniqueManager: Tried to level up technique '", technique_data.technique_name, "' which is not active.")
 		return false
 
 func get_active_techniques() -> Array[TechniqueData]:

@@ -158,21 +158,7 @@ func collect_qi(value: int) -> void:
 
 		# --- Emit update after level up ---
 		GlobalEvents.player_qi_updated.emit(current_qi, experience_to_next_level, level)
-
-		_trigger_level_up_event()
-
-func _trigger_level_up_event():
-	var options = UpgradeGenerator.generate_upgrade_options(self, 3) # Request 3 options
-
-	# Check if options were successfully generated
-	if options.is_empty():
-		printerr("Player: Failed to generate level up options!")
-		# Handle error case - maybe retry, offer default, or skip UI?
-		return 
-		
-	# Emit the global signal WITH the generated options data
-	# This will be caught by the UI to show the level-up options
-	GlobalEvents.player_leveled_up.emit(options) 
+		GlobalEvents.player_leveled_up.emit(self) # Emit the level-up event
 
 func _on_upgrade_selected(selected_upgrade_data: Dictionary) -> void: 
 	

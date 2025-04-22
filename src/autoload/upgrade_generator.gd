@@ -1,7 +1,7 @@
 extends Node
 
 # Generates upgrade options based on the player's current state
-func generate_upgrade_options(player: Node, num_options: int = 3) -> Array[Dictionary]:
+func generate_upgrade_options(player: Player, num_options: int = 3) -> Array[Dictionary]:
 	if not is_instance_valid(player):
 		printerr("UpgradeGenerator: Invalid player node provided.")
 		return []
