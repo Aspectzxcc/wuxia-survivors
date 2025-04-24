@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @onready var health: Health = $Health
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var max_despawn_distance : float = 1000.0 # Max distance from player before despawning
 @export_range(0.0, 1.0) var base_qi_drop_chance: float = 0.7 # Base chance (0-1) to drop Qi orb
@@ -122,6 +123,12 @@ func handle_hit(damage: float, knockback_force: float, knockback_direction: Vect
 		health.take_damage(damage)
 	else:
 		printerr(self.name, " has no valid HealthComponent or take_damage method!")
+
+	# Play hit flash
+	if animation_player and animation_player.has_animation("hit_flash"):
+		animation_player.play("hit_flash")
+	else:
+		printerr(self.name, " has no valid AnimationPlayer or hit_flash animation!")
 
 	# Play the hit sound using the SoundManager
 	SoundManager.play_sound(Enums.SoundEffect.HIT_ENEMY)

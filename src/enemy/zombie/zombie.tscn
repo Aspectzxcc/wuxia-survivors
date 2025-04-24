@@ -1,8 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnn4rdax23ajs"]
+[gd_scene load_steps=11 format=3 uid="uid://cnn4rdax23ajs"]
 
 [ext_resource type="Texture2D" uid="uid://bhiyqrh1o68l6" path="res://assets/sprites/enemy/Zombie.png" id="1_mvdax"]
 [ext_resource type="Script" uid="uid://cflnrityrnhdy" path="res://src/enemy/enemy.gd" id="1_u36mw"]
+[ext_resource type="Shader" uid="uid://byolatu68cw1t" path="res://src/enemy/hit_flash.gdshader" id="2_5mipj"]
 [ext_resource type="Script" uid="uid://byxfwff5wx0yr" path="res://src/components/health.gd" id="2_u36mw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gf3ms"]
+resource_local_to_scene = true
+shader = ExtResource("2_5mipj")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5mipj"]
 animations = [{
@@ -19,12 +26,51 @@ animations = [{
 radius = 11.75
 height = 73.0
 
+[sub_resource type="Animation" id="Animation_jlc0l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ktuw4"]
+resource_name = "hit_flash"
+length = 0.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.19, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pj7ut"]
+_data = {
+&"RESET": SubResource("Animation_jlc0l"),
+&"hit_flash": SubResource("Animation_ktuw4")
+}
+
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("1_u36mw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_gf3ms")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_5mipj")
 
@@ -35,3 +81,8 @@ shape = SubResource("CapsuleShape2D_u36mw")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_u36mw")
 metadata/_custom_type_script = "uid://byxfwff5wx0yr"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pj7ut")
+}
