@@ -1,16 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnx0dv6qi6i78"]
+[gd_scene load_steps=9 format=3 uid="uid://dnx0dv6qi6i78"]
 
 [ext_resource type="Script" uid="uid://nui8hebiswwt" path="res://src/technique/qi_blast/qi_blast.gd" id="1_auxed"]
 [ext_resource type="Texture2D" uid="uid://dprre85v556uf" path="res://assets/sprites/effects/Retro Impact Effect F.png" id="2_02ovi"]
+[ext_resource type="Shader" uid="uid://id8kdipnopus" path="res://src/technique/qi_blast/qi_blast.gdshader" id="2_7y0cw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4tuc"]
+shader = ExtResource("2_7y0cw")
+shader_parameter/aura_color = Color(0.54902, 0.996078, 1, 0.54902)
+shader_parameter/aura_width = 1.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s2ol0"]
 radius = 7.0
+
+[sub_resource type="Gradient" id="Gradient_02ovi"]
+offsets = PackedFloat32Array(0.00529101, 0.513228, 1)
+colors = PackedColorArray(0.831845, 1, 0.996219, 1, 0.871726, 1, 0.997449, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7y0cw"]
+gradient = SubResource("Gradient_02ovi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02ovi"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 90.0
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 98, 0)
+damping_min = 50.0
+damping_max = 70.0
+scale_min = 3.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_7y0cw")
 
 [node name="QiBlast" type="Area2D"]
 collision_mask = 4
 script = ExtResource("1_auxed")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q4tuc")
 texture = ExtResource("2_02ovi")
 region_enabled = true
 region_rect = Rect2(89.1977, 1119.23, 16.1227, 17.1742)
@@ -19,3 +46,10 @@ region_rect = Rect2(89.1977, 1119.23, 16.1227, 17.1742)
 shape = SubResource("CircleShape2D_s2ol0")
 
 [node name="LifetimeTimer" type="Timer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(1, -1)
+amount = 50
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_02ovi")
