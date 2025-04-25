@@ -24,7 +24,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8p25x"]
 radius = 11.0
-height = 41.0
+height = 35.0
 
 [sub_resource type="Animation" id="Animation_jlc0l"]
 length = 0.001
@@ -71,11 +71,10 @@ script = ExtResource("1_8p25x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ktuw4")
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.04, 0.04)
 sprite_frames = SubResource("SpriteFrames_up0lv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-2, 0.5)
 shape = SubResource("CapsuleShape2D_8p25x")
 

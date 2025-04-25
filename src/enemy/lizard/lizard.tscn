@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cflnrityrnhdy" path="res://src/enemy/enemy.gd" id="1_job52"]
 [ext_resource type="Script" uid="uid://byxfwff5wx0yr" path="res://src/components/health.gd" id="1_xwkhs"]
-[ext_resource type="Texture2D" uid="uid://ger4n58y58p2" path="res://assets/sprites/enemy/lizard.png" id="2_7nvta"]
 [ext_resource type="Shader" uid="uid://byolatu68cw1t" path="res://src/enemy/hit_flash.gdshader" id="2_up0lv"]
+[ext_resource type="Texture2D" uid="uid://bo4w703i8d5k4" path="res://assets/sprites/enemy/lizard.png" id="3_up0lv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q8aw6"]
 resource_local_to_scene = true
@@ -15,7 +15,7 @@ shader_parameter/flash_value = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_7nvta")
+"texture": ExtResource("3_up0lv")
 }],
 "loop": true,
 "name": &"default",
@@ -23,7 +23,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7nvta"]
-radius = 14.5
+radius = 30.0
 height = 70.0
 
 [sub_resource type="Animation" id="Animation_jlc0l"]
@@ -73,9 +73,11 @@ script = ExtResource("1_job52")
 material = SubResource("ShaderMaterial_q8aw6")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_job52")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 7)
+position = Vector2(0, 4)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7nvta")
 
 [node name="Health" type="Node" parent="."]

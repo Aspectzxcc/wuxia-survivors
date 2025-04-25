@@ -86,6 +86,7 @@ sources/0 = SubResource("TileSetAtlasSource_8u65w")
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_qbpk3")
+game_timer_debug_start = 240.0
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("enemy_container")]
 script = ExtResource("3_3n4h4")

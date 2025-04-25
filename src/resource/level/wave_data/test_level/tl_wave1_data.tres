@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://ckrttlhmt80cx"]
 
 [ext_resource type="Script" uid="uid://csnc4delcyk16" path="res://src/data/level/enemy_wave_entry.gd" id="1_5x5sd"]
-[ext_resource type="Resource" uid="uid://bbex4r8yprbk" path="res://src/resource/level/enemy_wave_entry/test_level/paper_talisman_wave_entry.tres" id="2_60uds"]
+[ext_resource type="Resource" uid="uid://dqfhrk2wg6pry" path="res://src/resource/level/enemy_wave_entry/test_level/snake_wave_entry.tres" id="2_d3o4u"]
 [ext_resource type="Resource" uid="uid://1mwnvn64ka65" path="res://src/resource/level/enemy_wave_entry/test_level/skeleton_wave_entry.tres" id="3_bysu1"]
 [ext_resource type="Script" uid="uid://msggko7q7niv" path="res://src/data/level/wave_data.gd" id="5_d7pas"]
 
@@ -11,5 +11,5 @@ time_start = 60.0
 min_concurrent = 30
 spawn_interval = 1.0
 spawn_burst_count = 6
-enemy_entries = Array[ExtResource("1_5x5sd")]([ExtResource("2_60uds"), ExtResource("3_bysu1")])
+enemy_entries = Array[ExtResource("1_5x5sd")]([ExtResource("2_d3o4u"), ExtResource("3_bysu1")])
 metadata/_custom_type_script = "uid://msggko7q7niv"

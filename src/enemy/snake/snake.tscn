@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnn4rdax23ajs"]
+[gd_scene load_steps=11 format=3 uid="uid://b4j1h2qmj4qr2"]
 
-[ext_resource type="Script" uid="uid://cflnrityrnhdy" path="res://src/enemy/enemy.gd" id="1_u36mw"]
-[ext_resource type="Shader" uid="uid://byolatu68cw1t" path="res://src/enemy/hit_flash.gdshader" id="2_5mipj"]
-[ext_resource type="Script" uid="uid://byxfwff5wx0yr" path="res://src/components/health.gd" id="2_u36mw"]
-[ext_resource type="Texture2D" uid="uid://ck5378c7y3513" path="res://assets/sprites/enemy/zombie.png" id="3_5mipj"]
+[ext_resource type="Script" uid="uid://cflnrityrnhdy" path="res://src/enemy/enemy.gd" id="1_bxatr"]
+[ext_resource type="Shader" uid="uid://byolatu68cw1t" path="res://src/enemy/hit_flash.gdshader" id="2_0axv2"]
+[ext_resource type="Texture2D" uid="uid://bywfdrsafqhf2" path="res://assets/sprites/enemy/snake.png" id="3_bxatr"]
+[ext_resource type="Script" uid="uid://byxfwff5wx0yr" path="res://src/components/health.gd" id="4_13u6c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gf3ms"]
 resource_local_to_scene = true
-shader = ExtResource("2_5mipj")
+shader = ExtResource("2_0axv2")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
@@ -15,7 +15,7 @@ shader_parameter/flash_value = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5mipj")
+"texture": ExtResource("3_bxatr")
 }],
 "loop": true,
 "name": &"default",
@@ -23,8 +23,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u36mw"]
-radius = 12.0
-height = 64.0
+radius = 12.75
+height = 31.0
 
 [sub_resource type="Animation" id="Animation_jlc0l"]
 length = 0.001
@@ -64,22 +64,23 @@ _data = {
 &"hit_flash": SubResource("Animation_ktuw4")
 }
 
-[node name="Zombie" type="CharacterBody2D"]
+[node name="Snake" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 12
-script = ExtResource("1_u36mw")
+script = ExtResource("1_bxatr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_gf3ms")
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.04, 0.04)
 sprite_frames = SubResource("SpriteFrames_5mipj")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, -0.5)
 shape = SubResource("CapsuleShape2D_u36mw")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("2_u36mw")
+script = ExtResource("4_13u6c")
 metadata/_custom_type_script = "uid://byxfwff5wx0yr"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

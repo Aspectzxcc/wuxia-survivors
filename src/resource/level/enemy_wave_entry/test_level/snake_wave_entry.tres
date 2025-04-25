@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyWaveEntry" load_steps=3 format=3 uid="uid://dqfhrk2wg6pry"]
+
+[ext_resource type="Script" uid="uid://csnc4delcyk16" path="res://src/data/level/enemy_wave_entry.gd" id="1_t24qu"]
+[ext_resource type="Resource" uid="uid://cyj8x02xjbgdx" path="res://src/resource/enemy/snake_data.tres" id="1_w74vu"]
+
+[resource]
+script = ExtResource("1_t24qu")
+enemy_data = ExtResource("1_w74vu")
+spawn_chance = 1.0
+bypass_global_limit = false
+metadata/_custom_type_script = "uid://csnc4delcyk16"

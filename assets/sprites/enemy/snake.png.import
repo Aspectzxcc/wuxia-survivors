@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck5378c7y3513"
-path="res://.godot/imported/zombie.png-4730592597775b490cff72bf734dbdc4.ctex"
+uid="uid://bywfdrsafqhf2"
+path="res://.godot/imported/snake.png-510fe7aaef57791da23e756a49f8a895.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/zombie.png"
-dest_files=["res://.godot/imported/zombie.png-4730592597775b490cff72bf734dbdc4.ctex"]
+source_file="res://assets/sprites/enemy/snake.png"
+dest_files=["res://.godot/imported/snake.png-510fe7aaef57791da23e756a49f8a895.ctex"]
 
 [params]
 
