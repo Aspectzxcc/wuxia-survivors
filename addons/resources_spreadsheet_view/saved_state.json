@@ -33,6 +33,17 @@
         "visibility": 0
       }
     },
+    "res://src/resource/level_upgrades/technique/wanderers_strike/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
     "res://src/resource/technique/": {
       "metadata/_custom_type_script": {
         "visibility": 0.0
@@ -49,7 +60,8 @@
     "res://src/resource/technique/",
     "res://src/resource/character/",
     "res://src/resource/enemy/",
-    "res://src/resource/level/wave_data/test_level/"
+    "res://src/resource/level/wave_data/test_level/",
+    "res://src/resource/level_upgrades/technique/wanderers_strike/"
   ],
   "table_functions": {
     "filter": [
