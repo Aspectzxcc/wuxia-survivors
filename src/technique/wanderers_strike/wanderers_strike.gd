@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var visual_size_multiplier: float = 2.5 # Base visual scale adjustment
+@export var visual_size_multiplier: float = 1.0 # Base visual scale adjustment
 @export var base_hitbox_width: float = 50.0 # The width of the collision shape at scale 1.0
 @export var base_hitbox_length: float = 100.0 # The length of the collision shape at scale 1.0
 
@@ -56,9 +56,37 @@ func _ready():
         printerr(self.name, ": CollisionShape is not a RectangleShape2D! Cannot set size.")
 
     if is_instance_valid(effect_sprite):
-        var sprite_scale_x = scale_factor * visual_size_multiplier
-        var sprite_scale_y = scale_factor * visual_size_multiplier
-        effect_sprite.scale = Vector2(sprite_scale_x, sprite_scale_y)
+        # --- Non-Uniform Scaling based on Hitbox ---
+        # This scales the sprite non-uniformly to match the final hitbox dimensions,
+        # adjusted by visual_size_multiplier. It will stretch/squash the texture.
+
+        # 1. Get the sprite's base texture size (size at scale 1,1)
+        #    Assumes animation "default" and frame 0 exist. Change if needed.
+        var frame_texture = effect_sprite.sprite_frames.get_frame_texture("default", 0)
+        if frame_texture:
+            var base_sprite_size = frame_texture.get_size()
+            if base_sprite_size.x > 0 and base_sprite_size.y > 0: # Avoid division by zero
+                # 2. Calculate the target visual dimensions based on the hitbox
+                #    Assuming sprite's X maps to hitbox length, Y maps to hitbox width.
+                var target_visual_length = final_length * visual_size_multiplier
+                var target_visual_width = final_width * visual_size_multiplier
+
+                # 3. Calculate the required scale factors independently
+                var required_scale_x = target_visual_length / base_sprite_size.x
+                var required_scale_y = target_visual_width / base_sprite_size.y
+
+                effect_sprite.scale = Vector2(required_scale_x, required_scale_y)
+            else:
+                printerr(self.name, ": Base sprite size is zero, cannot calculate non-uniform scale. Falling back.")
+                # Fallback to previous uniform scaling as a safety measure
+                var uniform_scale = scale_factor * visual_size_multiplier
+                effect_sprite.scale = Vector2(uniform_scale, uniform_scale)
+        else:
+            printerr(self.name, ": Could not get frame texture 'default', frame 0 for scaling. Falling back.")
+            # Fallback to previous uniform scaling as a safety measure
+            var uniform_scale = scale_factor * visual_size_multiplier
+            effect_sprite.scale = Vector2(uniform_scale, uniform_scale)
+        # --- End Non-Uniform Scaling ---
 
     duration_timer.wait_time = final_strike_duration
     duration_timer.one_shot = true
@@ -97,7 +125,6 @@ func _start_sweep() -> void:
 
     duration_timer.start()
     if is_instance_valid(effect_sprite):
-        effect_sprite.play("default")
         effect_sprite.show()
 
 
