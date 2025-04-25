@@ -33,18 +33,11 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 				instance.queue_free()
 			return
 
-		# Add to the scene tree (important for timers etc.)
-		# Ensure the current scene is valid before adding
-		var current_scene = player.get_tree().current_scene
-		if not is_instance_valid(current_scene):
-			printerr("AlternatingSweep: Current scene is invalid, cannot add instance.")
-			if is_instance_valid(instance):
-				instance.queue_free()
-			return
-		current_scene.add_child(instance)
-
 		# Calculate offset position based on current_attack_direction
-		var offset_x = (instance.base_hitbox_length / 2) * current_attack_direction
+		var hitbox_size_multiplier = calculated_stats.get(StatType.TECHNIQUE_AREA_SIZE, 1.0)
+		var hitbox_length = instance.base_hitbox_length * hitbox_size_multiplier
+
+		var offset_x = (hitbox_length / 2) * current_attack_direction
 		var offset = Vector2(offset_x, 0)
 		instance.global_position = player.global_position + offset
 
@@ -60,9 +53,12 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 				instance.queue_free()
 			return # Stop processing if initialization fails
 
+		# Add to the scene tree (important for timers etc.)
+		player.get_tree().current_scene.add_child(instance)
+
 		# Flip direction for the *next* sweep in this activation
 		current_attack_direction *= -1
-
+		
 		# If multiple sweeps, delay the next one
 		if amount > 1 and i < amount - 1:
 			# Check if player is still valid before creating timer

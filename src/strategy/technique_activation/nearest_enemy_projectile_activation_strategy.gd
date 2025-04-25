@@ -32,10 +32,6 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 			printerr("NearestEnemyProjectile: Instantiated scene is not a Node2D!")
 			continue # Skip this projectile
 
-		# Add to scene tree
-		player.get_tree().current_scene.add_child(instance)
-		instance.global_position = player.global_position
-
 		# Calculate direction
 		var direction = (target_enemy.global_position - player.global_position).normalized()
 
@@ -47,6 +43,10 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 		else:
 			printerr("NearestEnemyProjectile: Instantiated scene '%s' is missing initialize method." % technique_data.effect_scene.resource_path)
 		# --- END UPDATED ---
+
+		# Add to scene tree
+		player.get_tree().current_scene.add_child(instance)
+		instance.global_position = player.global_position
 
 		# If multiple projectiles, delay the next one
 		if amount > 1 and i < amount - 1:

@@ -44,11 +44,8 @@ func _ready():
         queue_free()
         return
 
-    # --- MODIFIED: Calculate final dimensions from area size multiplier ---
-    var scale_factor = sqrt(final_area_size_multiplier)
-
-    var final_width = base_hitbox_width * scale_factor
-    var final_length = base_hitbox_length * scale_factor
+    var final_width = base_hitbox_width * final_area_size_multiplier
+    var final_length = base_hitbox_length * final_area_size_multiplier
 
     if collision_shape.shape is RectangleShape2D:
         collision_shape.shape.size = Vector2(final_length, final_width)
@@ -79,12 +76,12 @@ func _ready():
             else:
                 printerr(self.name, ": Base sprite size is zero, cannot calculate non-uniform scale. Falling back.")
                 # Fallback to previous uniform scaling as a safety measure
-                var uniform_scale = scale_factor * visual_size_multiplier
+                var uniform_scale = final_area_size_multiplier * visual_size_multiplier
                 effect_sprite.scale = Vector2(uniform_scale, uniform_scale)
         else:
             printerr(self.name, ": Could not get frame texture 'default', frame 0 for scaling. Falling back.")
             # Fallback to previous uniform scaling as a safety measure
-            var uniform_scale = scale_factor * visual_size_multiplier
+            var uniform_scale = final_area_size_multiplier * visual_size_multiplier
             effect_sprite.scale = Vector2(uniform_scale, uniform_scale)
         # --- End Non-Uniform Scaling ---
 

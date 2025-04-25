@@ -30,14 +30,14 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 				instance.queue_free()
 			return
 
-		player.add_child(instance)
-		player.move_child(instance, 0)
-		instance.owner = player
-
 		if instance.has_method("initialize"):
 			instance.initialize(calculated_stats)
 		else:
 			printerr("DamageRadiusActivation: Instantiated scene '%s' is missing initialize method." % technique_data.scene.resource_path)
+
+		player.add_child(instance)
+		player.move_child(instance, 0)
+		instance.owner = player
 
 	else:
 		# --- Instance already exists, update its stats ---
