@@ -15,7 +15,6 @@
 
 [sub_resource type="Resource" id="Resource_mxw7q"]
 script = ExtResource("1_mxw7q")
-horizontal_offset = 50.0
 metadata/_custom_type_script = "uid://b3if1aikcnl8j"
 
 [resource]
