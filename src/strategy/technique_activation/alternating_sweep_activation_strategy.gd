@@ -2,7 +2,6 @@ class_name AlternatingSweepActivationStrategy
 extends TechniqueActivationStrategy
 
 const StatType = Enums.StatType # Use unified StatType
-@export var horizontal_offset: float = 40.0 # How far to offset the sweep horizontally
 
 # Overrides the base activate method
 func activate(player: Player, calculated_stats: Dictionary, technique_data: TechniqueData) -> void:
@@ -45,7 +44,8 @@ func activate(player: Player, calculated_stats: Dictionary, technique_data: Tech
 		current_scene.add_child(instance)
 
 		# Calculate offset position based on current_attack_direction
-		var offset = Vector2(horizontal_offset * current_attack_direction, 0)
+		var offset_x = (instance.base_hitbox_length / 2) * current_attack_direction
+		var offset = Vector2(offset_x, 0)
 		instance.global_position = player.global_position + offset
 
 		instance.scale.x = current_attack_direction # Flip the instance to match the direction
