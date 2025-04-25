@@ -18,18 +18,6 @@ func _ready():
 func set_option_data(data: Dictionary):
     option_data = data
 
-    if data == null:
-        # Handle null data - hide or show placeholder text/technique_icon
-        name_label.text = "N/A"
-        description_label.text = ""
-        if is_instance_valid(technique_icon):
-            technique_icon.texture = null # Or a default placeholder technique_icon
-        if is_instance_valid(new_label):
-            new_label.visible = false
-        self.disabled = true
-        self.visible = false # Or keep visible but clearly disabled
-        return
-
     # Populate UI elements from the data dictionary
     name_label.text = data.get("name", "Error: Name Missing")
     description_label.text = data.get("description", "")
