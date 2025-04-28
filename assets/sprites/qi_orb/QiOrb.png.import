@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co7hcbfmnpyry"
-path="res://.godot/imported/qi_orb.png-c2f6a73de146290824ccac77addf8618.ctex"
+uid="uid://b1x0spwcjw3sr"
+path="res://.godot/imported/QiOrb.png-ef4ed070febfdd16a76ba404d8a4278b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/qi_orb/qi_orb.png"
-dest_files=["res://.godot/imported/qi_orb.png-c2f6a73de146290824ccac77addf8618.ctex"]
+source_file="res://assets/sprites/qi_orb/QiOrb.png"
+dest_files=["res://.godot/imported/QiOrb.png-ef4ed070febfdd16a76ba404d8a4278b.ctex"]
 
 [params]
 
