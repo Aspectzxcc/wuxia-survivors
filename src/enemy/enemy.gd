@@ -8,6 +8,10 @@ extends CharacterBody2D
 @export var max_despawn_distance : float = 1000.0 # Max distance from player before despawning
 @export_range(0.0, 1.0) var base_qi_drop_chance: float = 0.7 # Base chance (0-1) to drop Qi orb
 
+@export var enemy_node_group: String = "Enemy" # Group name for enemy
+@export var enemy_collision_layer: int = 3
+@export var player_hurtbox_layer: int = 4
+
 var enemy_data: EnemyData
 var current_health: float
 
@@ -25,6 +29,14 @@ func _ready() -> void:
 		queue_free()
 		return
 
+	# add to enemy group (if not already added in the editor)
+	add_to_group(enemy_node_group)
+
+	# Set collision layers (if not already set in the editor)
+	set_collision_layer_value(enemy_collision_layer, true)
+	set_collision_mask_value(enemy_collision_layer, true)
+	set_collision_mask_value(player_hurtbox_layer, true)
+
 	max_despawn_distance_sq = max_despawn_distance * max_despawn_distance # Calculate squared distance once
 		
 	if health == null:
@@ -41,14 +53,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
-	# --- Despawn Check ---
 	if PlayerTracker.is_player_valid:
 		var player_pos = PlayerTracker.get_tracked_player_position()
 		# Use distance_squared_to for better performance (avoids sqrt)
 		if global_position.distance_squared_to(player_pos) > max_despawn_distance_sq:
 			queue_free() # Despawn if too far
-			return # Stop further processing for this frame
-	# --- End Despawn Check ---
+			return
 
 	match current_state:
 		State.KNOCKED_BACK:

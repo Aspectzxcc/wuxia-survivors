@@ -87,7 +87,7 @@ _data = {
 &"hit_flash": SubResource("Animation_ktuw4")
 }
 
-[node name="Snake" type="CharacterBody2D"]
+[node name="Snake" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("1_bxatr")
