@@ -90,6 +90,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_death() -> void:
 	GlobalEvents.enemy_killed.emit()
+	set_physics_process(false)
 
 	set_collision_layer_value(enemy_collision_layer, false)
 	set_collision_mask_value(enemy_collision_layer, false)
