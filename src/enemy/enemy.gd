@@ -91,9 +91,12 @@ func _physics_process(delta: float) -> void:
 func _on_death() -> void:
 	GlobalEvents.enemy_killed.emit()
 
+	set_collision_layer_value(enemy_collision_layer, false)
+	set_collision_mask_value(enemy_collision_layer, false)
+	set_collision_mask_value(player_hurtbox_layer, false)
+
 	if enemy_data == null: return
 
-	# --- Calculate Drop Chance with Luck ---
 	var final_drop_chance = base_qi_drop_chance
 	if PlayerTracker.is_player_valid:
 		var player = PlayerTracker.get_tracked_player_node()
@@ -103,9 +106,7 @@ func _on_death() -> void:
 			final_drop_chance = clamp(base_qi_drop_chance * player_luck, 0.0, 1.0)
 		else:
 			printerr("Enemy: Could not get valid player or luck stat for drop calculation.")
-	# --- End Calculation ---
 
-	# --- Check Drop Chance ---
 	if enemy_data.qi_orb_scene != null and randf() < final_drop_chance:
 		var qi_orb = enemy_data.qi_orb_scene.instantiate()
 
@@ -115,9 +116,12 @@ func _on_death() -> void:
 		# Use call_deferred to avoid issues if the parent is also being freed
 		get_parent().call_deferred("add_child", qi_orb)
 		qi_orb.global_position = global_position
-	# --- End Check ---
 
-	queue_free()
+	if animation_player and animation_player.has_animation("death"):
+		animation_player.play("death")
+	else:
+		printerr(self.name, " has no valid AnimationPlayer or death animation!")
+		queue_free()
 
 func apply_knockback(direction: Vector2, strength: float) -> void:
 	if strength <= 0:
@@ -135,7 +139,7 @@ func handle_hit(damage: float, knockback_force: float, knockback_direction: Vect
 		printerr(self.name, " has no valid HealthComponent or take_damage method!")
 
 	# Play hit flash
-	if animation_player and animation_player.has_animation("hit_flash"):
+	if animation_player and animation_player.has_animation("hit_flash") and !animation_player.is_playing():
 		animation_player.play("hit_flash")
 	else:
 		printerr(self.name, " has no valid AnimationPlayer or hit_flash animation!")
