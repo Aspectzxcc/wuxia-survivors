@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnqpumw61o0gd"]
+[gd_scene load_steps=7 format=3 uid="uid://dnqpumw61o0gd"]
 
-[ext_resource type="Texture2D" uid="uid://dgmbk54imsvu1" path="res://assets/sprites/effects/Smoke.png" id="1_8lod7"]
 [ext_resource type="Shader" uid="uid://bj4dokbjjbr4y" path="res://src/technique/incense_burner/incense_burner.gdshader" id="1_d26uv"]
 [ext_resource type="Script" uid="uid://b01qtk81fhoia" path="res://src/technique/incense_burner/incense_burner.gd" id="1_lvltc"]
 
@@ -18,34 +17,6 @@ shader_parameter/rotation_speed = 0.05
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lvltc"]
 gradient = SubResource("Gradient_d26uv")
 
-[sub_resource type="Gradient" id="Gradient_ivcnn"]
-offsets = PackedFloat32Array(0, 0.656085, 1)
-colors = PackedColorArray(0.796242, 0.796243, 0.796243, 1, 0.333333, 0.333333, 0.333333, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8lod7"]
-gradient = SubResource("Gradient_ivcnn")
-
-[sub_resource type="Curve" id="Curve_8lod7"]
-_data = [Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.493023, 0.483146), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_d26uv"]
-curve = SubResource("Curve_8lod7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ivcnn"]
-particle_flag_disable_z = true
-emission_shape = 2
-emission_sphere_radius = 32.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 100.0
-orbit_velocity_min = -1.0
-orbit_velocity_max = 1.0
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -2.23517e-06
-linear_accel_max = -2.23517e-06
-scale_curve = SubResource("CurveTexture_d26uv")
-color_ramp = SubResource("GradientTexture1D_8lod7")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_dy4tq"]
 radius = 32.0
 
@@ -58,13 +29,6 @@ material = SubResource("ShaderMaterial_lvltc")
 position = Vector2(1, 0)
 scale = Vector2(0.992188, 1)
 texture = SubResource("GradientTexture2D_lvltc")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 50
-texture = ExtResource("1_8lod7")
-lifetime = 2.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_ivcnn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dy4tq")

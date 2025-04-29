@@ -142,8 +142,6 @@ func handle_hit(damage: float, knockback_force: float, knockback_direction: Vect
 	# Play hit flash
 	if animation_player and animation_player.has_animation("hit_flash") and !animation_player.is_playing():
 		animation_player.play("hit_flash")
-	else:
-		printerr(self.name, " has no valid AnimationPlayer or hit_flash animation!")
 
 	# Play the hit sound using the SoundManager
 	SoundManager.play_sound(Enums.SoundEffect.HIT_ENEMY)
