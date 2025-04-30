@@ -246,6 +246,7 @@ _data = {
 [node name="PaperTalisman" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 14
+motion_mode = 1
 script = ExtResource("1_8p25x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
