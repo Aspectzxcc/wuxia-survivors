@@ -7,13 +7,7 @@ const SoundEffect = Enums.SoundEffect
 # Map SoundEffect enum values to their audio file paths
 const SOUND_PATHS = {
     SoundEffect.HIT_ENEMY: "res://assets/audio/sfx/hit_sound.wav",
-    # Add paths for other sounds defined in the enum:
-    # Enums.SoundEffect.ENEMY_DEATH: "res://assets/audio/sfx/enemy_death.wav",
-    # Enums.SoundEffect.PLAYER_HURT: "res://assets/audio/sfx/player_hurt.wav",
-    # Enums.SoundEffect.LEVEL_UP: "res://assets/audio/sfx/level_up.wav",
-    # Enums.SoundEffect.QI_ORB_PICKUP: "res://assets/audio/sfx/pickup.wav",
-    # Enums.SoundEffect.UI_CLICK: "res://assets/audio/sfx/ui_click.wav",
-    # ... etc.
+    SoundEffect.QI_ORB_PICKUP: "res://assets/audio/sfx/qi_orb_pickup.mp3",
 }
 
 # Dictionary to hold preloaded AudioStream resources

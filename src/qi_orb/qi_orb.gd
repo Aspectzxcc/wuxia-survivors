@@ -1,6 +1,8 @@
 extends Area2D
 
+const SoundEffect = Enums.SoundEffect
 const State = Enums.QiOrbState
+
 var current_state: State = State.IDLE
 
 @export var max_speed: float = 300.0
@@ -31,6 +33,7 @@ func _on_area_entered(area: Area2D):
 func _on_body_entered(body: Node2D):
 	if body.has_method("collect_qi"):
 		body.collect_qi(qi_value)
+		SoundManager.play_sound(SoundEffect.QI_ORB_PICKUP)
 		queue_free()
 
 func _process(delta: float) -> void:
