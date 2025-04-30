@@ -61,8 +61,8 @@ autostart = true
 
 [node name="HealthBar" parent="." instance=ExtResource("5_5f2sf")]
 offset_left = -15.0
-offset_top = 21.0
+offset_top = 30.0
 offset_right = 15.0
-offset_bottom = 25.0
+offset_bottom = 34.0
 
 [connection signal="timeout" from="DamageTickTimer" to="." method="_on_damage_tick_timer_timeout"]
