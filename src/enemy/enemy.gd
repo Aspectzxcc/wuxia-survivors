@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export_range(0.0, 1.0) var base_qi_drop_chance: float = 0.7 # Base chance (0-1) to drop Qi orb
 
 @export var enemy_node_group: String = "Enemy" # Group name for enemy
+@export var player_collision_layer: int = 1
 @export var enemy_collision_layer: int = 3
 @export var player_hurtbox_layer: int = 4
 
@@ -33,6 +34,7 @@ func _ready() -> void:
 	add_to_group(enemy_node_group)
 
 	# Set collision layers (if not already set in the editor)
+	set_collision_layer_value(player_collision_layer, true)
 	set_collision_layer_value(enemy_collision_layer, true)
 	set_collision_mask_value(enemy_collision_layer, true)
 	set_collision_mask_value(player_hurtbox_layer, true)
@@ -92,6 +94,7 @@ func _on_death() -> void:
 	GlobalEvents.enemy_killed.emit()
 	set_physics_process(false)
 
+	set_collision_layer_value(player_collision_layer, true)
 	set_collision_layer_value(enemy_collision_layer, false)
 	set_collision_mask_value(enemy_collision_layer, false)
 	set_collision_mask_value(player_hurtbox_layer, false)
