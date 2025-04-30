@@ -34,8 +34,8 @@ func _ready() -> void:
 	add_to_group(enemy_node_group)
 
 	# Set collision layers (if not already set in the editor)
-	set_collision_layer_value(player_collision_layer, true)
 	set_collision_layer_value(enemy_collision_layer, true)
+	set_collision_mask_value(player_collision_layer, true)
 	set_collision_mask_value(enemy_collision_layer, true)
 	set_collision_mask_value(player_hurtbox_layer, true)
 
@@ -94,10 +94,10 @@ func _on_death() -> void:
 	GlobalEvents.enemy_killed.emit()
 	set_physics_process(false)
 
-	set_collision_layer_value(player_collision_layer, true)
-	set_collision_layer_value(enemy_collision_layer, false)
-	set_collision_mask_value(enemy_collision_layer, false)
-	set_collision_mask_value(player_hurtbox_layer, false)
+	set_collision_layer_value(enemy_collision_layer, true)
+	set_collision_mask_value(player_collision_layer, true)
+	set_collision_mask_value(enemy_collision_layer, true)
+	set_collision_mask_value(player_hurtbox_layer, true)
 
 	if enemy_data == null: return
 
