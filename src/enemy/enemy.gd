@@ -21,6 +21,12 @@ var current_state: State = State.MOVING
 var knockback_velocity: Vector2 = Vector2.ZERO
 var max_despawn_distance_sq : float # Store squared distance for efficiency
 
+func _set_collision_layers(value: bool) -> void:
+	set_collision_layer_value(enemy_collision_layer, value)
+	set_collision_mask_value(player_collision_layer, value)
+	set_collision_mask_value(enemy_collision_layer, value)
+	set_collision_mask_value(player_hurtbox_layer, value)
+
 func initialize(data: EnemyData) -> void:
 	self.enemy_data = data
 
@@ -33,11 +39,7 @@ func _ready() -> void:
 	# add to enemy group (if not already added in the editor)
 	add_to_group(enemy_node_group)
 
-	# Set collision layers (if not already set in the editor)
-	set_collision_layer_value(enemy_collision_layer, true)
-	set_collision_mask_value(player_collision_layer, true)
-	set_collision_mask_value(enemy_collision_layer, true)
-	set_collision_mask_value(player_hurtbox_layer, true)
+	_set_collision_layers(true)
 
 	max_despawn_distance_sq = max_despawn_distance * max_despawn_distance # Calculate squared distance once
 		
@@ -94,10 +96,7 @@ func _on_death() -> void:
 	GlobalEvents.enemy_killed.emit()
 	set_physics_process(false)
 
-	set_collision_layer_value(enemy_collision_layer, true)
-	set_collision_mask_value(player_collision_layer, true)
-	set_collision_mask_value(enemy_collision_layer, true)
-	set_collision_mask_value(player_hurtbox_layer, true)
+	_set_collision_layers(false)
 
 	if enemy_data == null: return
 
